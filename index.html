@@ -58,14 +58,13 @@
       z-index:40;
     }
 
+    .nav-left{display:flex;align-items:center;gap:16px}
+    .logo{
       font-family:'Creepster',cursive;
       color:var(--accent);
       font-size:20px;
-
       letter-spacing:0.6px;
-
     }
-
 
     .nav-links{
       display:flex;
@@ -80,7 +79,6 @@
       border-radius:10px;
       font-weight:600;
       font-size:14px;
-
     }
 
     .nav-links a:hover,
@@ -93,7 +91,6 @@
     .nav-actions{display:flex;align-items:center;gap:10px}
     .btn{
       background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-
       border:1px solid rgba(255,255,255,0.04);
       padding:8px 12px;
       border-radius:10px;
@@ -127,14 +124,16 @@
     @media (max-width:880px){
       .nav-links{
         position:fixed;
-        right:16px;
-        top:calc(var(--nav-height) + 44px);
         display:flex;
         flex-direction:column;
         gap:10px;
+
         padding:12px;
+
         background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.55));
+
         border-radius:12px;
+
         border:1px solid rgba(255,255,255,0.03);
         opacity:0;
         pointer-events:none;
@@ -143,22 +142,14 @@
       }
       .nav-links.open{opacity:1;pointer-events:auto;transform:none}
       .hamburger{display:block}
+
     }
 
-    /* TITLE STYLES */
+    /* ORIGINAL PAGE STYLES (kept) */
     .title{display:flex;align-items:baseline;gap:12px;}
-    h1{
-      margin:0;
-      font-family:"Creepster",cursive;
-      font-size:38px;
-      color:#ff6a00; /* яркий оранжевый */
-      text-shadow:
-        0 0 10px #ff6a00,
-        0 0 20px #ff4500,
-        0 0 30px rgba(0,0,0,0.7),
-        0 5px 15px rgba(0,0,0,0.9);
-    }
+    h1{margin:0;font-family:"Creepster",cursive;font-size:34px;color:var(--accent);text-shadow:0 6px 20px rgba(195,59,59,0.08),0 1px 0 rgba(0,0,0,0.7);}
     .subtitle{color:var(--muted);font-size:13px;margin-top:6px;}
+
 
     .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:16px;padding:22px;box-shadow:0 8px 30px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.02);min-height:420px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.03);}
 
@@ -189,6 +180,20 @@
       color: var(--muted);
     }
 
+    .site-footer__inner {
+      max-width:980px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .footer-nav { display:flex; gap:18px; align-items:center; }
+    .foot-link { color:var(--muted); text-decoration:none; font-weight:600; padding:6px 10px; border-radius:8px; border:1px solid transparent; }
+    .foot-link:hover { background: rgba(255,255,255,0.02); color:#fff; border-color: rgba(255,255,255,0.03); }
+
     .footer-meta { text-align:right; display:flex; flex-direction:column; gap:4px; min-width:180px; }
     .footer-copy { font-size:14px; color:var(--muted); font-weight:600; }
     .footer-note { font-size:12px; color:rgba(255,255,255,0.6); }
@@ -196,6 +201,7 @@
     @media (max-width:720px){
       .site-footer__inner{ flex-direction:column; align-items:center; text-align:center; }
       .footer-meta{ text-align:center; min-width:auto; }
+      .footer-nav{ order:2; gap:12px; margin-top:8px; flex-wrap:wrap; justify-content:center; }
     }
 
   </style>
@@ -251,7 +257,7 @@
     <footer class="site-footer" role="contentinfo">
       <div class="site-footer__inner">
         <div class="footer-meta">
-          <div class="footer-copy">©jinxforever—2025</div>
+          <div class="footer-copy">© Қорқынышты әңгімелер — 2025</div>
           <div class="footer-note">Түн тыныш болсын…</div>
         </div>
       </div>
@@ -267,17 +273,20 @@
       {title: "Сымбатты өлтіруші", text: "Ол жылы жымиып, жұмсақ сөйлеп, адамдарды қауіпсіз сездірді — солайша тұзағы жасалды. Оның құрбандары ешқашан қашпады, айқайламады, өйткені оларға сенім болды. Тек есік жабылған кезде олар оның көзіндегі шындығын көрді: артында ешкім жоқ еді."}
     ];
 
+    // Elements
     const storyEl = document.getElementById('story');
     const tagEl = document.getElementById('tag');
     const listEl = document.getElementById('list');
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
-    const randomBtn = document.getElementById('randomTop');
-    const extraTop = document.getElementById('extraTop');
+    const randomBtn = document.getElementById('randomTop') || document.getElementById('randomBtn');
+    const extraTop = document.getElementById('extraTop') || document.getElementById('extraBtn');
 
+    // Nav
     const navToggle = document.getElementById('navToggle');
     const primaryNav = document.getElementById('primaryNav');
 
+    // Build list
     let idx = 0;
     let typing = false;
 
@@ -310,16 +319,21 @@
     prevBtn.addEventListener('click', ()=>{ if(!typing){ idx=(idx-1+STORIES.length)%STORIES.length; showStory(idx); } });
     nextBtn.addEventListener('click', ()=>{ if(!typing){ idx=(idx+1)%STORIES.length; showStory(idx); } });
 
-    randomBtn.addEventListener('click', ()=>{ const r=Math.floor(Math.random()*STORIES.length); showStory(r); });
-    extraTop.addEventListener('click', ()=>{ window.location.href='extra.html'; });
+    // Random top button mirrors random behavior
+    document.getElementById('randomTop').addEventListener('click', ()=>{ const r=Math.floor(Math.random()*STORIES.length); showStory(r); });
+
+    // Extra top (if used)
+    document.getElementById('extraTop').addEventListener('click', ()=>{ window.location.href='extra.html'; });
 
     showStory(0);
 
+    // NAV toggle for mobile
     navToggle && navToggle.addEventListener('click', ()=>{
       const open = primaryNav.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', String(open));
     });
 
+    // Close nav on link click (mobile)
     primaryNav && primaryNav.addEventListener('click', (e)=>{
       const a = e.target.closest('a');
       if(!a) return;
