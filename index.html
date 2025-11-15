@@ -4,9 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Қорқынышты Әңгімелер — Түнгі Оқиғалар</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --bg1: #0b0f12;
@@ -19,6 +17,30 @@
       --nav-height: 72px;
     }
 
+    /* Theme overrides (default is :root). Add more themes by setting data-theme on <html> */
+    [data-theme="dark"] {
+      --bg1: #090b0d;
+      --bg2: #0d0f14;
+      --accent: #ff5b5b;
+      --muted: #a3a6ad;
+      --card: rgba(255,255,255,0.05);
+      --glass: rgba(255,255,255,0.035);
+      --glass-2: rgba(255,255,255,0.025);
+    }
+    [data-theme="deep"] {
+      --bg1: #000000;
+      --bg2: #000000;
+      --accent: #ff2b2b;
+      --muted: #777777;
+      --card: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.03);
+    }
+
+    /* smooth transitions for theme change */
+    body, .card, .site-footer, .navbar, .story, .list, .rating-box { transition: background-color .24s ease, color .24s ease, box-shadow .24s ease, border-color .24s ease; }
+    :root, [data-theme] { transition: none; } /* avoid variable transition weirdness */
+
     html,body{
       height:100%;
       margin:0;
@@ -29,7 +51,6 @@
       -moz-osx-font-smoothing:grayscale;
       padding:32px;
     }
-
     .app{
       width:100%;
       max-width:980px;
@@ -37,8 +58,10 @@
       grid-template-columns:1fr 360px;
       gap:28px;
       align-items:start;
+
       margin: 0 auto;
     }
+
 
     /* NAVBAR */
     .navbar{
@@ -69,22 +92,17 @@
     .nav-links{
       display:flex;
       gap:14px;
+      align-items:center;
     }
 
     .nav-links a{
       color:var(--muted);
-
       text-decoration:none;
-
       padding:8px 12px;
       border-radius:10px;
-
       font-weight:600;
-
       font-size:14px;
-
     }
-
 
     .nav-links a:hover,
     .nav-links a.active{
@@ -94,27 +112,21 @@
     }
 
     .nav-actions{display:flex;align-items:center;gap:10px}
-
     .btn{
       background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       border:1px solid rgba(255,255,255,0.04);
-
       padding:8px 12px;
-
       border-radius:10px;
       color:#e8eef2;
-
       cursor:pointer;
       font-weight:600;
     }
-
     .btn:hover{transform:translateY(-2px)}
 
     .danger{border-color:rgba(195,59,59,0.4);color:var(--accent)}
 
     .hamburger{
       display:none;
-
       background:none;
       border:0;
       cursor:pointer;
@@ -153,7 +165,7 @@
       .hamburger{display:block}
     }
 
-    /* ORIGINAL PAGE STYLES */
+    /* ORIGINAL PAGE STYLES (kept) */
     .title{display:flex;align-items:baseline;gap:12px;}
     h1{margin:0;font-family:"Creepster",cursive;font-size:34px;color:var(--accent);text-shadow:0 6px 20px rgba(195,59,59,0.08),0 1px 0 rgba(0,0,0,0.7);}
     .subtitle{color:var(--muted);font-size:13px;margin-top:6px;}
@@ -165,7 +177,6 @@
 
     .story{font-size:18px;line-height:1.7;color:#f3f7f8;white-space:pre-wrap;min-height:260px;max-height:420px;overflow:auto;padding-right:8px;letter-spacing:0.2px;font-weight:300;}
     .controls{display:flex;gap:10px;margin-top:18px;}
-
     button{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px;color:#e8eef2;cursor:pointer;font-weight:600;transition: transform .12s ease, box-shadow .12s;}
     button:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.55);}
 
@@ -173,6 +184,22 @@
     .list{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
     .story-item{padding:10px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--muted);background:transparent;border:1px dashed rgba(255,255,255,0.02);}
     .story-item:hover{color:#fff;background:var(--glass-2);}
+
+    /* RATING STYLES */
+    .rating-box { margin-top:16px; }
+    #stars { display:flex; gap:6px; align-items:center; margin-top:6px; }
+    #stars .star {
+      background:transparent;
+      border:0;
+      font-size:22px;
+      cursor:pointer;
+      padding:6px;
+      border-radius:6px;
+      color:var(--muted);
+    }
+    #stars .star:hover, #stars .star:focus { transform:scale(1.15); outline:none; color: #fff; }
+    #stars .star.active { transform:scale(1.25); filter:drop-shadow(0 6px 16px rgba(0,0,0,0.5)); color:var(--accent); }
+    #likeBtn.liked { background: linear-gradient(180deg, rgba(195,59,59,0.18), rgba(195,59,59,0.12)); color:var(--accent); border:1px solid rgba(195,59,59,0.35); }
 
     /* FOOTER */
     .site-footer {
@@ -197,6 +224,10 @@
       flex-wrap:wrap;
     }
 
+    .footer-nav { display:flex; gap:18px; align-items:center; }
+    .foot-link { color:var(--muted); text-decoration:none; font-weight:600; padding:6px 10px; border-radius:8px; border:1px solid transparent; }
+    .foot-link:hover { background: rgba(255,255,255,0.02); color:#fff; border-color: rgba(255,255,255,0.03); }
+
     .footer-meta { text-align:right; display:flex; flex-direction:column; gap:4px; min-width:180px; }
     .footer-copy { font-size:14px; color:var(--muted); font-weight:600; }
     .footer-note { font-size:12px; color:rgba(255,255,255,0.6); }
@@ -204,6 +235,7 @@
     @media (max-width:720px){
       .site-footer__inner{ flex-direction:column; align-items:center; text-align:center; }
       .footer-meta{ text-align:center; min-width:auto; }
+      .footer-nav{ order:2; gap:12px; margin-top:8px; flex-wrap:wrap; justify-content:center; }
     }
 
   </style>
@@ -211,7 +243,7 @@
 <body>
   <div class="app" id="app">
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR (kazakh) -->
     <header class="navbar" role="banner">
       <div class="nav-left">
         <div class="logo">Қорқынышты әңгімелер</div>
@@ -232,6 +264,8 @@
       <div class="nav-actions">
         <button class="btn" id="randomTop">Кездейсоқ</button>
         <button class="btn danger" id="extraTop">Қосымша</button>
+        <!-- Theme switch button -->
+        <button class="btn" id="themeBtn" aria-label="Change theme">Тақырып</button>
       </div>
     </header>
 
@@ -247,6 +281,23 @@
         <button id="prev">◀ Алдыңғы</button>
         <button id="next">Келесі ▶</button>
       </div>
+
+      <!-- RATING (вставлено) -->
+      <div class="rating-box" aria-label="Рейтинг">
+        <h4 style="margin:8px 0 6px 0">Баға беру</h4>
+        <div id="stars" role="radiogroup" aria-label="Звёздный рейтинг">
+          <button class="star" data-star="1" aria-label="1 звезда">⭐</button>
+          <button class="star" data-star="2" aria-label="2 звезды">⭐</button>
+          <button class="star" data-star="3" aria-label="3 звезды">⭐</button>
+          <button class="star" data-star="4" aria-label="4 звезды">⭐</button>
+          <button class="star" data-star="5" aria-label="5 звезды">⭐</button>
+        </div>
+
+        <button id="likeBtn" class="btn" style="margin-top:8px">❤️ Маған ұнады</button>
+        <p id="ratingStatus" style="margin-top:8px;color:var(--muted);font-size:13px"></p>
+      </div>
+      <!-- /RATING -->
+
     </main>
 
     <aside>
@@ -255,11 +306,11 @@
       <div style="margin-top:12px;font-size:13px;color:var(--muted)">Жеңіл қорқыныш үшін — терең дем алып, күліңіз :)</div>
     </aside>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (kazakh) -->
     <footer class="site-footer" role="contentinfo">
       <div class="site-footer__inner">
         <div class="footer-meta">
-          <div class="footer-copy">© jinx_forever — 2025</div> 
+          <div class="footer-copy">© jinxforever — 2025</div>
           <div class="footer-note">Түн тыныш болсын…</div>
         </div>
       </div>
@@ -268,18 +319,27 @@
   </div>
 
   <script>
+    // Stories data
     const STORIES = [
       {title: "Ростов өлтірушісі", text: "Ол қарапайым көшелерде жүрді және қарапайым адам сияқты көрінді. Бірақ ол адамдарды қасқыр қойларды бақылағандай бақылайтын. Көзқарасына түскендер таңдалып қойылғандарын байқамайды. Ол алыстан бақылап жүрді — сабырлы, тыныш — ал олар түсінген кезде, түн олардың дауысын жұтып қойған болатын."},
       {title: "Уайтчепелдің көлеңкесі", text: "Лондонның тар көшелерінде тұман тірі зат сияқты сырғып өтті. Шырақтар жыпылықтады, қадамдар жаңғырықты, және әр бұрышта — қарап тұрған кезде жоғалып кететін силует. Адамдар оны түтін немесе сыбыр, жүрек соғуы арасындағы кеңістік деп айтты. Оның құрбандары соңғы рет артқы жағының салқын демін есінде сақтады."},
       {title: "Түнгі туннель", text: "Киотода түнде жүргізушілер көретін, тастанды туннель бар. Ақ кимоно киген әйел жолдың ортасында тұрады, бетін көре алмайсың — ол жай ғана көлеңке сияқты. Бір таксист тоқтады, әйел үнсіз отырды. Бірнеше минуттан кейін ол артқы көздеуші айна мен терезелердің қалың қан торымен жабылғанын байқады. Ол рульді бұрды — әйел ғайып болды, ал орнында суық, ылғалды саусақ іздері қалды. Сол күннен бері бұл жол түнде бос — ал батылдар ғана жүріп өтеді, олар сыбырды естиді: «Неге қарап тұрсың?»"}
-    ];
+     ];
 
+    // Elements
     const storyEl = document.getElementById('story');
     const tagEl = document.getElementById('tag');
     const listEl = document.getElementById('list');
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
+    const randomBtn = document.getElementById('randomTop') || document.getElementById('randomBtn');
+    const extraTop = document.getElementById('extraTop') || document.getElementById('extraBtn');
 
+    // Nav
+    const navToggle = document.getElementById('navToggle');
+    const primaryNav = document.getElementById('primaryNav');
+
+    // Build list
     let idx = 0;
     let typing = false;
 
@@ -291,10 +351,69 @@
       listEl.appendChild(it);
     });
 
+    // Helper: create safe key from title (so рейтинг привязан к истории, а не к порядку)
+    function keyFromTitle(title){
+      return 'story_' + String(title).toLowerCase().replace(/\s+/g,'_').replace(/[^\w-_]/g,'');
+    }
+
+    // --- RATING: localStorage привязано к title ---
+    const stars = document.querySelectorAll("#stars .star");
+    const likeBtn = document.getElementById("likeBtn");
+    const ratingStatus = document.getElementById("ratingStatus");
+
+    function ratingKey(title){ return keyFromTitle(title) + '_rating'; }
+    function likeKey(title){ return keyFromTitle(title) + '_liked'; }
+
+    function highlightStars(value){
+      stars.forEach(s => s.classList.remove('active'));
+      const n = Number(value) || 0;
+      for(let i=0;i<n;i++) if(stars[i]) stars[i].classList.add('active');
+    }
+
+    function restoreRatingForIndex(i){
+      const title = STORIES[i].title;
+      const saved = localStorage.getItem(ratingKey(title));
+      const liked = localStorage.getItem(likeKey(title)) === 'true';
+      highlightStars(saved ? Number(saved) : 0);
+      if(liked){
+        likeBtn.classList.add('liked');
+        ratingStatus.textContent = "Бұл әңгіме саған ұнаған";
+      } else {
+        likeBtn.classList.remove('liked');
+        ratingStatus.textContent = saved ? `Сен ${saved}⭐ қойдың` : "";
+      }
+    }
+
+    // Навешиваем события на звезды
+    stars.forEach(s=>{
+      s.addEventListener('click', ()=>{
+        const v = Number(s.dataset.star);
+        const title = STORIES[idx].title;
+        localStorage.setItem(ratingKey(title), String(v));
+        highlightStars(v);
+        ratingStatus.textContent = `Сен ${v}⭐ қойдың`;
+      });
+      s.addEventListener('keyup', (e)=>{
+        if(e.key === 'Enter' || e.key === ' ') { s.click(); }
+      });
+    });
+
+    // Лайк-кнопка
+    likeBtn.addEventListener('click', ()=>{
+      const title = STORIES[idx].title;
+      const isLiked = likeBtn.classList.toggle('liked');
+      localStorage.setItem(likeKey(title), isLiked ? 'true' : 'false');
+      ratingStatus.textContent = isLiked ? "Бұл әңгіме саған ұнаған" : (localStorage.getItem(ratingKey(title)) ? `Сен ${localStorage.getItem(ratingKey(title))}⭐ қойдың` : "");
+    });
+
+    // showStory: обновлён чтобы восстанавливать рейтинг
     function showStory(i){
       idx = i;
       tagEl.textContent = 'Әңгіме ' + (i+1) + ' / ' + STORIES.length;
       typeWriter(STORIES[i].text);
+      // восстановим рейтинг для этой истории (восстановление видно после typeWriter завершится,
+      // но можно показать сразу)
+      restoreRatingForIndex(i);
     }
 
     async function typeWriter(text){
@@ -312,18 +431,21 @@
     prevBtn.addEventListener('click', ()=>{ if(!typing){ idx=(idx-1+STORIES.length)%STORIES.length; showStory(idx); } });
     nextBtn.addEventListener('click', ()=>{ if(!typing){ idx=(idx+1)%STORIES.length; showStory(idx); } });
 
+    // Random top button mirrors random behavior
     document.getElementById('randomTop').addEventListener('click', ()=>{ const r=Math.floor(Math.random()*STORIES.length); showStory(r); });
+
+    // Extra top (if used)
+    document.getElementById('extraTop').addEventListener('click', ()=>{ window.location.href='extra.html'; });
 
     showStory(0);
 
-    const navToggle = document.getElementById('navToggle');
-    const primaryNav = document.getElementById('primaryNav');
-
+    // NAV toggle for mobile
     navToggle && navToggle.addEventListener('click', ()=>{
       const open = primaryNav.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', String(open));
     });
 
+    // Close nav on link click (mobile)
     primaryNav && primaryNav.addEventListener('click', (e)=>{
       const a = e.target.closest('a');
       if(!a) return;
@@ -331,6 +453,52 @@
       a.classList.add('active');
       if(window.innerWidth <= 880){ primaryNav.classList.remove('open'); navToggle.setAttribute('aria-expanded','false'); }
     });
+
+    /* THEME SWITCHER */
+    (function(){
+      const btn = document.getElementById('themeBtn');
+      const THEMES = ['default','dark','deep'];
+      const KEY = 'site-theme-v1';
+
+      // read saved
+      let saved = localStorage.getItem(KEY) || 'default';
+      let ti = THEMES.indexOf(saved);
+      if(ti === -1) { ti = 0; saved = 'default'; }
+
+      function applyThemeByName(name){
+        if(name === 'default') {
+          document.documentElement.removeAttribute('data-theme');
+        } else {
+          document.documentElement.setAttribute('data-theme', name);
+        }
+      }
+
+      applyThemeByName(saved);
+
+      btn && btn.addEventListener('click', ()=>{
+        ti = (ti + 1) % THEMES.length;
+        const next = THEMES[ti];
+        applyThemeByName(next);
+        localStorage.setItem(KEY, next);
+
+        // little UI hint (temporary)
+        const hint = document.createElement('div');
+        hint.textContent = next === 'default' ? 'Тақырып: Default' : (next === 'dark' ? 'Тақырып: Dark' : 'Тақырып: Deep');
+        hint.style.position = 'fixed';
+        hint.style.left = '50%';
+        hint.style.transform = 'translateX(-50%)';
+        hint.style.bottom = '18px';
+        hint.style.padding = '8px 12px';
+        hint.style.borderRadius = '8px';
+        hint.style.zIndex = 9999;
+        hint.style.fontWeight = 600;
+        hint.style.background = 'rgba(0,0,0,0.6)';
+        hint.style.color = '#fff';
+        document.body.appendChild(hint);
+        setTimeout(()=> hint.remove(), 900);
+      });
+    })();
+
   </script>
 </body>
 </html>
