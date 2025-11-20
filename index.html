@@ -16,30 +16,19 @@
       --glass-2: rgba(255,255,255,0.02);
       --nav-height: 72px;
     }
-    [data-theme="dark"] {
-      --bg1: #090b0d;
-      --bg2: #0d0f14;
-      --accent: #ff5b5b;
-      --muted: #a3a6ad;
-      --card: rgba(255,255,255,0.05);
-      --glass: rgba(255,255,255,0.035);
-      --glass-2: rgba(255,255,255,0.025);
-    }
-    [data-theme="deep"] {
-      --bg1: #000000;
-      --bg2: #000000;
-      --accent: #ff2b2b;
-      --muted: #777777;
-      --card: rgba(255,255,255,0.06);
-      --glass: rgba(255,255,255,0.04);
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:"Inter",system-ui,sans-serif;
       background:linear-gradient(180deg,var(--bg1),var(--bg2));
       color:#e8eef2;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       padding:32px;
     }
-    .app{
 
+    .app{
       width:100%;
       max-width:980px;
       display:grid;
@@ -48,6 +37,8 @@
       align-items:start;
       margin: 0 auto;
     }
+
+    /* NAVBAR */
     .navbar{
       grid-column:1/3;
       height:var(--nav-height);
@@ -56,14 +47,10 @@
       justify-content:space-between;
       gap:12px;
       padding:10px 18px;
-      background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow:0 8px 30px rgba(0,0,0,0.45);
-      position:sticky;
       top:20px;
       z-index:40;
     }
+
     .nav-left{display:flex;align-items:center;gap:16px}
     .logo{
       font-family:'Creepster',cursive;
@@ -71,11 +58,13 @@
       font-size:20px;
       letter-spacing:0.6px;
     }
+
     .nav-links{
       display:flex;
       gap:14px;
       align-items:center;
     }
+
     .nav-links a{
       color:var(--muted);
       text-decoration:none;
@@ -84,12 +73,14 @@
       font-weight:600;
       font-size:14px;
     }
+
     .nav-links a:hover,
     .nav-links a.active{
       color:#fff;
       background:var(--glass-2);
       border:1px solid rgba(255,255,255,0.02);
     }
+
     .nav-actions{display:flex;align-items:center;gap:10px}
     .btn{
       background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
@@ -101,9 +92,28 @@
       font-weight:600;
     }
     .btn:hover{transform:translateY(-2px)}
+
     .danger{border-color:rgba(195,59,59,0.4);color:var(--accent)}
-    .hamburger{display:none;background:none;border:0;cursor:pointer;padding:8px;border-radius:8px;color:var(--muted);}
-    .hamburger span{display:block;width:20px;height:2px;margin:4px 0;background:var(--muted);border-radius:2px;}
+
+    .hamburger{
+      display:none;
+      background:none;
+      border:0;
+      cursor:pointer;
+      padding:8px;
+      border-radius:8px;
+      color:var(--muted);
+    }
+
+    .hamburger span{
+      display:block;
+      width:20px;
+      height:2px;
+      margin:4px 0;
+      background:var(--muted);
+      border-radius:2px;
+    }
+
     @media (max-width:880px){
       .nav-links{
         position:fixed;
@@ -124,128 +134,80 @@
       .nav-links.open{opacity:1;pointer-events:auto;transform:none}
       .hamburger{display:block}
     }
+
+    /* ORIGINAL PAGE STYLES (kept) */
     .title{display:flex;align-items:baseline;gap:12px;}
     h1{margin:0;font-family:"Creepster",cursive;font-size:34px;color:var(--accent);text-shadow:0 6px 20px rgba(195,59,59,0.08),0 1px 0 rgba(0,0,0,0.7);}
     .subtitle{color:var(--muted);font-size:13px;margin-top:6px;}
+
     .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:16px;padding:22px;box-shadow:0 8px 30px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.02);min-height:420px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.03);}
+
     .meta{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
     .tag{background:var(--glass);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted);border:1px solid rgba(255,255,255,0.02);}
+
     .story{font-size:18px;line-height:1.7;color:#f3f7f8;white-space:pre-wrap;min-height:260px;max-height:420px;overflow:auto;padding-right:8px;letter-spacing:0.2px;font-weight:300;}
     .controls{display:flex;gap:10px;margin-top:18px;}
     button{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px;color:#e8eef2;cursor:pointer;font-weight:600;transition: transform .12s ease, box-shadow .12s;}
     button:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.55);}
+
     aside{background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);border-radius:16px;padding:18px;height:100%;border:1px solid rgba(255,255,255,0.03);}
     .list{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
     .story-item{padding:10px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--muted);background:transparent;border:1px dashed rgba(255,255,255,0.02);}
     .story-item:hover{color:#fff;background:var(--glass-2);}
 
+    /* RATING STYLES */
     .rating-box { margin-top:16px; }
-
     #stars { display:flex; gap:6px; align-items:center; margin-top:6px; }
-
-    #stars .star { background:transparent; border:0; font-size:22px; cursor:pointer; padding:6px; border-radius:6px; color:var(--muted); }
-
+    #stars .star {
+      background:transparent;
+      border:0;
+      font-size:22px;
+      cursor:pointer;
+      padding:6px;
+      border-radius:6px;
+      color:var(--muted);
+    }
     #stars .star:hover, #stars .star:focus { transform:scale(1.15); outline:none; color: #fff; }
-
     #stars .star.active { transform:scale(1.25); filter:drop-shadow(0 6px 16px rgba(0,0,0,0.5)); color:var(--accent); }
-
     #likeBtn.liked { background: linear-gradient(180deg, rgba(195,59,59,0.18), rgba(195,59,59,0.12)); color:var(--accent); border:1px solid rgba(195,59,59,0.35); }
-    .site-footer {
 
+    /* FOOTER */
+    .site-footer {
       grid-column:1/3;
       width:100%;
       margin-top:20px;
-
       padding:18px 20px;
-
       border-radius:12px;
       background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.02));
-
       border: 1px solid rgba(255,255,255,0.03);
       box-shadow: 0 8px 30px rgba(0,0,0,0.55);
       color: var(--muted);
-
     }
-    .site-footer__inner { max-width:980px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    .footer-nav { display:flex; gap:18px; align-items:center; }
 
+    .site-footer__inner {
+      max-width:980px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .footer-nav { display:flex; gap:18px; align-items:center; }
     .foot-link { color:var(--muted); text-decoration:none; font-weight:600; padding:6px 10px; border-radius:8px; border:1px solid transparent; }
     .foot-link:hover { background: rgba(255,255,255,0.02); color:#fff; border-color: rgba(255,255,255,0.03); }
+
     .footer-meta { text-align:right; display:flex; flex-direction:column; gap:4px; min-width:180px; }
     .footer-copy { font-size:14px; color:var(--muted); font-weight:600; }
     .footer-note { font-size:12px; color:rgba(255,255,255,0.6); }
+
     @media (max-width:720px){
       .site-footer__inner{ flex-direction:column; align-items:center; text-align:center; }
       .footer-meta{ text-align:center; min-width:auto; }
       .footer-nav{ order:2; gap:12px; margin-top:8px; flex-wrap:wrap; justify-content:center; }
     }
 
-    /* Modal / form styles (обновлено: непрозрачное окно) */
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      /* затемнение плотнее, чтобы модал выглядело как отдельное окно */
-      background:rgba(0,0,0,0.72);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:120;
-    }
-    .modal{
-
-      width:96%;
-
-      max-width:720px;
-
-      /* полностью непрозрачный фон, использует переменную темы для согласованности */
-
-      background: var(--bg2);
-      border-radius:12px;
-
-      padding:18px;
-
-      /* чуть более явная граница для "оконного" эффекта */
-
-      border:1px solid rgba(255,255,255,0.08);
-
-      box-shadow:0 24px 80px rgba(0,0,0,0.75);
-      /* убедимся, что внутренняя форма читаема: немного подсветим поля */
-    }
-    .modal h3{ margin:0 0 8px 0; color:var(--accent); font-family:'Creepster',cursive; }
-    .form-row{ display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
-
-    .form-row input[type="text"], .form-row textarea{
-
-      /* сделаем поля непрозрачными, чтобы текст контрастировал с фоном */
-      background: rgba(255,255,255,0.03);
-      border:1px solid rgba(255,255,255,0.06);
-
-      padding:10px;
-      border-radius:8px;
-
-      color:inherit;
-
-      font-size:14px;
-      resize:vertical;
-
-    }
-    .form-actions{ display:flex; gap:8px; justify-content:flex-end; }
-    .hint { font-size:13px; color:var(--muted); }
-
-    /* small helper */
-
-    .small { font-size:13px; color:var(--muted); }
-
-    /* show modal */
-    .modal-backdrop.open{ display:flex; }
-
-    /* Fireplace helpers */
-    #firebox { border-radius:12px; position:relative; overflow:hidden; }
-    #firebox canvas { display:block; width:100%; height:160px; }
-    .fire-controls { display:flex; gap:8px; align-items:center; }
-    @media (max-width:880px){
-      #firebox canvas { height:120px; }
-    }
   </style>
 </head>
 <body>
@@ -262,27 +224,18 @@
 
         <nav class="nav-links" id="primaryNav" aria-label="Негізгі">
           <a href="#" class="active">Басты бет</a>
-          <a href="#stories" id="openNewStory">Жаңа әңгімелер</a>
+          <a href="#stories">Жаңа әңгімелер</a>
           <a href="#favorites">Таңдаулы</a>
           <a href="#authors">Авторлар</a>
           <a href="#contacts">Байланыс</a>
-
         </nav>
-
       </div>
-
 
       <div class="nav-actions">
-
         <button class="btn" id="randomTop">Кездейсоқ</button>
-
         <button class="btn danger" id="extraTop">Қосымша</button>
-        <!-- Theme switch button -->
-
-        <button class="btn" id="themeBtn" aria-label="Change theme">Интерфейс түсі</button>
       </div>
     </header>
-
 
     <!-- MAIN CONTENT -->
     <main class="card" aria-live="polite">
@@ -290,28 +243,21 @@
         <div class="tag" id="tag">Әңгіме 1 / 3</div>
       </div>
 
-
-      <div class="story" id="story" tabindex="0"></div>
-
+      <div class="story" id="story"></div>
 
       <div class="controls">
         <button id="prev">◀ Алдыңғы</button>
-
         <button id="next">Келесі ▶</button>
       </div>
-
 
       <!-- RATING (вставлено) -->
       <div class="rating-box" aria-label="Рейтинг">
         <h4 style="margin:8px 0 6px 0">Баға беру</h4>
-
         <div id="stars" role="radiogroup" aria-label="Звёздный рейтинг">
           <button class="star" data-star="1" aria-label="1 звезда">⭐</button>
           <button class="star" data-star="2" aria-label="2 звезды">⭐</button>
-
           <button class="star" data-star="3" aria-label="3 звезды">⭐</button>
           <button class="star" data-star="4" aria-label="4 звезды">⭐</button>
-
           <button class="star" data-star="5" aria-label="5 звезды">⭐</button>
         </div>
 
@@ -325,196 +271,72 @@
     <aside>
       <div style="font-weight:600">Әңгімелер</div>
       <div class="list" id="list"></div>
-
-
-      <!-- Fireplace block (added) -->
-
-      <div id="fireplaceWrapper" style="margin-top:14px;">
-
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-
-          <div style="font-weight:600">Камин</div>
-
-          <div class="fire-controls">
-            <button id="fireToggle" class="btn" aria-pressed="true" title="Вкл/Выкл камин">Камин ON</button>
-
-            <button id="fireMute" class="btn" title="Звук камина">🔊</button>
-          </div>
-
-        </div>
-        <div id="firebox" aria-hidden="false" style="margin-top:10px; border-radius:12px; overflow:hidden; height:160px; position:relative; border:1px solid rgba(255,255,255,0.03);">
-          <canvas id="fireCanvas" width="360" height="160" style="display:block; width:100%; height:160px;"></canvas>
-          <!-- decorative logs via SVG to keep it light -->
-
-          <svg viewBox="0 0 360 160" preserveAspectRatio="none" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none">
-            <g id="logs" transform="translate(0,90)">
-
-              <rect x="60" y="40" rx="8" ry="8" width="160" height="18" fill="rgba(60,30,15,0.9)"/>
-              <rect x="130" y="48" rx="7" ry="7" width="110" height="12" fill="rgba(80,40,20,0.8)"/>
-            </g>
-
-          </svg>
-        </div>
-      </div>
-
-
       <div style="margin-top:12px;font-size:13px;color:var(--muted)">Жеңіл қорқыныш үшін — терең дем алып, күліңіз :)</div>
     </aside>
-
 
     <!-- FOOTER (kazakh) -->
     <footer class="site-footer" role="contentinfo">
       <div class="site-footer__inner">
         <div class="footer-meta">
-
           <div class="footer-copy">© jinxforever — 2025</div>
           <div class="footer-note">Түн тыныш болсын…</div>
         </div>
       </div>
     </footer>
-  </div>
-
-
-  <!-- Modal for adding new story -->
-  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
-
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-
-      <h3 id="modalTitle">Жаңа әңгіме қосу</h3>
-      <div class="hint">Қысқа атау мен толық мәтінді енгізің — жарияланымы жергілікті сақталады (браузерде).</div>
-
-
-      <div class="form-row">
-
-        <label class="small">Атау</label>
-
-        <input type="text" id="newTitle" placeholder="Әңгіме атауы (мысалы: Түнгі туннель)" />
-
-      </div>
-
-      <div class="form-row">
-
-        <label class="small">Мәтін</label>
-
-        <textarea id="newText" rows="6" placeholder="Әңгіме мәтіні..."></textarea>
-      </div>
-
-      <div class="form-actions">
-
-        <button class="btn" id="cancelNew">Бас тарту</button>
-        <button class="btn" id="saveNew">Жіберу</button>
-
-      </div>
-
-      <div style="margin-top:10px" id="formMsg" class="small"></div>
-    </div>
 
   </div>
 
   <script>
-
-    // ---------- initial stories (fallback) ----------
-    const DEFAULT_STORIES = [
+    // Stories data
+    const STORIES = [
       {title: "Ростов өлтірушісі", text: "Ол қарапайым көшелерде жүрді және қарапайым адам сияқты көрінді. Бірақ ол адамдарды қасқыр қойларды бақылағандай бақылайтын. Көзқарасына түскендер таңдалып қойылғандарын байқамайды. Ол алыстан бақылап жүрді — сабырлы, тыныш — ал олар түсінген кезде, түн олардың дауысын жұтып қойған болатын."},
-
       {title: "Уайтчепелдің көлеңкесі", text: "Лондонның тар көшелерінде тұман тірі зат сияқты сырғып өтті. Шырақтар жыпылықтады, қадамдар жаңғырықты, және әр бұрышта — қарап тұрған кезде жоғалып кететін силует. Адамдар оны түтін немесе сыбыр, жүрек соғуы арасындағы кеңістік деп айтты. Оның құрбандары соңғы рет артқы жағының салқын демін есінде сақтады."},
-
       {title: "Түнгі туннель", text: "Киотода түнде жүргізушілер көретін, тастанды туннель бар. Ақ кимоно киген әйел жолдың ортасында тұрады, бетін көре алмайсың — ол жай ғана көлеңке сияқты. Бір таксист тоқтады, әйел үнсіз отырды. Бірнеше минуттан кейін ол артқы көздеуші айна мен терезелердің қалың қан торымен жабылғанын байқады. Ол рульді бұрды — әйел ғайып болды, ал орнында суық, ылғалды саусақ іздері қалды. Сол күннен бері бұл жол түнде бос — ал батылдар ғана жүріп өтеді, олар сыбырды естиді: «Неге қарап тұрсың?»"}
+     ];
 
-    ];
-
-
-    // ---------- storage helpers ----------
-    const STORAGE_KEY = 'sf_stories_v1';
-
-
-    function loadStoriesFromStorage(){
-      try {
-
-        const raw = localStorage.getItem(STORAGE_KEY);
-
-        if(!raw) return DEFAULT_STORIES.slice();
-        const parsed = JSON.parse(raw);
-        if(Array.isArray(parsed) && parsed.length) return parsed;
-        return DEFAULT_STORIES.slice();
-
-      } catch(e) { return DEFAULT_STORIES.slice(); }
-
-    }
-
-
-    function saveStoriesToStorage(arr){
-
-      try {
-
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-
-      } catch(e) { console.error('save failed', e); }
-
-    }
-
-
-    // ---------- app state ----------
-    let STORIES = loadStoriesFromStorage();
+    // Elements
     const storyEl = document.getElementById('story');
     const tagEl = document.getElementById('tag');
     const listEl = document.getElementById('list');
     const prevBtn = document.getElementById('prev');
-
     const nextBtn = document.getElementById('next');
-    const randomBtn = document.getElementById('randomTop');
-    const extraTop = document.getElementById('extraTop');
+    const randomBtn = document.getElementById('randomTop') || document.getElementById('randomBtn');
+    const extraTop = document.getElementById('extraTop') || document.getElementById('extraBtn');
 
-
+    // Nav
     const navToggle = document.getElementById('navToggle');
-
     const primaryNav = document.getElementById('primaryNav');
 
+    // Build list
     let idx = 0;
-
     let typing = false;
 
+    STORIES.forEach((s,i)=>{
+      const it = document.createElement('div');
+      it.className='story-item';
+      it.textContent = (i+1) + '. ' + s.title;
+      it.addEventListener('click', ()=> showStory(i));
+      listEl.appendChild(it);
+    });
 
-    // safe key generator (rating/like keys tied to title)
+    // Helper: create safe key from title (so рейтинг привязан к истории, а не к порядку)
     function keyFromTitle(title){
       return 'story_' + String(title).toLowerCase().replace(/\s+/g,'_').replace(/[^\w-_]/g,'');
     }
 
-    function ratingKey(title){ return keyFromTitle(title) + '_rating'; }
-    function likeKey(title){ return keyFromTitle(title) + '_liked'; }
-
-
-    // build list from STORIES
-    function rebuildList(){
-
-      listEl.innerHTML = '';
-      STORIES.forEach((s,i)=>{
-        const it = document.createElement('div');
-
-        it.className='story-item';
-        it.textContent = (i+1) + '. ' + s.title;
-
-        it.addEventListener('click', ()=> showStory(i));
-        listEl.appendChild(it);
-
-      });
-    }
-
-
-    // rating elements
-
+    // --- RATING: localStorage привязано к title ---
     const stars = document.querySelectorAll("#stars .star");
     const likeBtn = document.getElementById("likeBtn");
     const ratingStatus = document.getElementById("ratingStatus");
 
+    function ratingKey(title){ return keyFromTitle(title) + '_rating'; }
+    function likeKey(title){ return keyFromTitle(title) + '_liked'; }
 
     function highlightStars(value){
       stars.forEach(s => s.classList.remove('active'));
       const n = Number(value) || 0;
-
       for(let i=0;i<n;i++) if(stars[i]) stars[i].classList.add('active');
     }
-
 
     function restoreRatingForIndex(i){
       const title = STORIES[i].title;
@@ -530,447 +352,76 @@
       }
     }
 
-
-    // stars click
-
+    // Навешиваем события на звезды
     stars.forEach(s=>{
       s.addEventListener('click', ()=>{
-
         const v = Number(s.dataset.star);
-
         const title = STORIES[idx].title;
-
         localStorage.setItem(ratingKey(title), String(v));
-
         highlightStars(v);
         ratingStatus.textContent = `Сен ${v}⭐ қойдың`;
-
       });
-
       s.addEventListener('keyup', (e)=>{
         if(e.key === 'Enter' || e.key === ' ') { s.click(); }
       });
-
     });
 
-
+    // Лайк-кнопка
     likeBtn.addEventListener('click', ()=>{
       const title = STORIES[idx].title;
       const isLiked = likeBtn.classList.toggle('liked');
-
       localStorage.setItem(likeKey(title), isLiked ? 'true' : 'false');
       ratingStatus.textContent = isLiked ? "Бұл әңгіме саған ұнаған" : (localStorage.getItem(ratingKey(title)) ? `Сен ${localStorage.getItem(ratingKey(title))}⭐ қойдың` : "");
-
     });
 
-
-    // showStory with typing
+    // showStory: обновлён чтобы восстанавливать рейтинг
     function showStory(i){
       idx = i;
-
       tagEl.textContent = 'Әңгіме ' + (i+1) + ' / ' + STORIES.length;
       typeWriter(STORIES[i].text);
-
+      // восстановим рейтинг для этой истории (восстановление видно после typeWriter завершится,
+      // но можно показать сразу)
       restoreRatingForIndex(i);
-      // focus story for accessibility
-
-      storyEl.setAttribute('tabindex','0');
-      storyEl.focus({preventScroll:true});
     }
 
-
     async function typeWriter(text){
-
       if(typing) return;
       typing=true;
       storyEl.textContent = "";
-
       for(let c=0;c<text.length;c++){
         storyEl.textContent += text[c];
         storyEl.scrollTop = storyEl.scrollHeight;
         await new Promise(res=>setTimeout(res,18 + (text[c]==='.'?60:0)));
-
       }
       typing=false;
-
     }
 
     prevBtn.addEventListener('click', ()=>{ if(!typing){ idx=(idx-1+STORIES.length)%STORIES.length; showStory(idx); } });
     nextBtn.addEventListener('click', ()=>{ if(!typing){ idx=(idx+1)%STORIES.length; showStory(idx); } });
 
-    // random & extra
+    // Random top button mirrors random behavior
+    document.getElementById('randomTop').addEventListener('click', ()=>{ const r=Math.floor(Math.random()*STORIES.length); showStory(r); });
 
-    randomBtn.addEventListener('click', ()=>{ const r=Math.floor(Math.random()*STORIES.length); showStory(r); });
-    extraTop.addEventListener('click', ()=>{ window.location.href='extra.html'; });
+    // Extra top (if used)
+    document.getElementById('extraTop').addEventListener('click', ()=>{ window.location.href='extra.html'; });
 
-    // nav toggle mobile
+    showStory(0);
+
+    // NAV toggle for mobile
     navToggle && navToggle.addEventListener('click', ()=>{
       const open = primaryNav.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', String(open));
     });
+
+    // Close nav on link click (mobile)
     primaryNav && primaryNav.addEventListener('click', (e)=>{
       const a = e.target.closest('a');
       if(!a) return;
       primaryNav.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
-
       a.classList.add('active');
       if(window.innerWidth <= 880){ primaryNav.classList.remove('open'); navToggle.setAttribute('aria-expanded','false'); }
     });
-
-    /* THEME SWITCHER */
-    (function(){
-      const btn = document.getElementById('themeBtn');
-      const THEMES = ['default','dark','deep'];
-      const KEY = 'site-theme-v1';
-      let saved = localStorage.getItem(KEY) || 'default';
-      let ti = THEMES.indexOf(saved);
-      if(ti === -1) { ti = 0; saved = 'default'; }
-      function applyThemeByName(name){
-        if(name === 'default') document.documentElement.removeAttribute('data-theme');
-        else document.documentElement.setAttribute('data-theme', name);
-      }
-      applyThemeByName(saved);
-      btn && btn.addEventListener('click', ()=>{
-        ti = (ti + 1) % THEMES.length;
-        const next = THEMES[ti];
-        applyThemeByName(next);
-        localStorage.setItem(KEY, next);
-        const hint = document.createElement('div');
-        hint.textContent = next === 'default' ? 'Default' : (next === 'dark' ? 'Dark' : 'Deep');
-        hint.style.position = 'fixed';
-        hint.style.left = '50%';
-        hint.style.transform = 'translateX(-50%)';
-        hint.style.bottom = '18px';
-        hint.style.padding = '8px 12px';
-        hint.style.borderRadius = '8px';
-        hint.style.zIndex = 9999;
-        hint.style.fontWeight = 600;
-        hint.style.background = 'rgba(0,0,0,0.6)';
-        hint.style.color = '#fff';
-        document.body.appendChild(hint);
-        setTimeout(()=> hint.remove(), 900);
-      });
-    })();
-
-    // ---------- New story modal logic ----------
-    const modalBackdrop = document.getElementById('modalBackdrop');
-    const openNewStoryLink = document.getElementById('openNewStory');
-    const cancelNew = document.getElementById('cancelNew');
-
-    const saveNew = document.getElementById('saveNew');
-
-    const newTitle = document.getElementById('newTitle');
-
-    const newText = document.getElementById('newText');
-
-    const formMsg = document.getElementById('formMsg');
-
-
-    function openModal(){
-
-      modalBackdrop.classList.add('open');
-
-      modalBackdrop.setAttribute('aria-hidden','false');
-
-      newTitle.value = '';
-      newText.value = '';
-      formMsg.textContent = '';
-      setTimeout(()=> newTitle.focus(), 120);
-    }
-
-    function closeModal(){
-      modalBackdrop.classList.remove('open');
-      modalBackdrop.setAttribute('aria-hidden','true');
-
-    }
-
-    // open modal when user clicks "Жаңа әңгімелер"
-
-    openNewStoryLink && openNewStoryLink.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); });
-
-    // close buttons
-
-    cancelNew.addEventListener('click', (e)=>{ e.preventDefault(); closeModal(); });
-
-
-    // submit new story
-    saveNew.addEventListener('click', (e)=>{
-
-      e.preventDefault();
-      const title = (newTitle.value || '').trim();
-      const text = (newText.value || '').trim();
-
-      if(!title){ formMsg.textContent = 'Атау енгізіңіз, бос қалмаңыз.'; return; }
-      if(!text){ formMsg.textContent = 'Мәтін енгізіңіз, бос қалмаңыз.'; return; }
-
-
-      // prevent exact duplicate titles
-
-      if(STORIES.some(s => s.title.toLowerCase() === title.toLowerCase())){
-        formMsg.textContent = 'Осындай атаумен әңгіме бар. Басқаша атаңыз немесе оны өзгертіңіз.';
-        return;
-
-      }
-
-      const item = { title, text };
-      STORIES.push(item);
-      saveStoriesToStorage(STORIES);
-      rebuildList();
-
-      closeModal();
-      // open the newly added story
-      showStory(STORIES.length - 1);
-
-      // small success hint
-      const hint = document.createElement('div');
-      hint.textContent = 'Әңгіме қосылды!';
-      hint.style.position = 'fixed';
-      hint.style.right = '18px';
-      hint.style.bottom = '18px';
-      hint.style.padding = '8px 12px';
-      hint.style.borderRadius = '8px';
-      hint.style.zIndex = 9999;
-      hint.style.fontWeight = 600;
-      hint.style.background = 'rgba(0,0,0,0.6)';
-      hint.style.color = '#fff';
-      document.body.appendChild(hint);
-      setTimeout(()=> hint.remove(), 1100);
-    });
-
-    // close modal on backdrop click or Escape
-    modalBackdrop.addEventListener('click', (e)=>{ if(e.target === modalBackdrop) closeModal(); });
-    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modalBackdrop.classList.contains('open')) closeModal(); });
-
-
-    // ---------- Fireplace script (added) ----------
-    (function(){
-      const canvas = document.getElementById('fireCanvas');
-      if(!canvas) return; // safety
-      const ctx = canvas.getContext('2d');
-      const DPR = Math.max(1, window.devicePixelRatio || 1);
-      const toggle = document.getElementById('fireToggle');
-      const muteBtn = document.getElementById('fireMute');
-
-
-      function resize() {
-        const rect = canvas.getBoundingClientRect();
-
-        canvas.width = Math.round(rect.width * DPR);
-
-        canvas.height = Math.round(rect.height * DPR);
-
-      }
-
-      resize();
-      window.addEventListener('resize', resize);
-
-
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      let particles = [];
-      const maxParticles = 120;
-
-      let running = true;
-
-      function rand(a,b){return a + Math.random()*(b-a);}
-      function HueGradient(t){
-        const r = Math.floor(255);
-        const g = Math.floor(150 + (1-t)*100);
-        const b = Math.floor(30*(1-t));
-
-        const a = Math.max(0, 1 - t*1.2);
-        return `rgba(${r},${g},${b},${a})`;
-
-      }
-
-
-      function spawn(){
-        if(particles.length > maxParticles) return;
-        const w = canvas.width, h = canvas.height;
-
-        const cx = w * 0.5;
-        const spread = w * 0.2;
-        const size = rand(8,28) * DPR;
-
-        particles.push({
-          x: cx + rand(-spread, spread),
-          y: h - rand(18,32)*DPR,
-
-          vx: rand(-0.3, 0.3) * DPR,
-          vy: -rand(0.3, 1.2) * DPR,
-
-          life: rand(900, 1800),
-          born: Date.now(),
-          size,
-
-          drift: rand(-0.02,0.02),
-          hueSeed: Math.random()
-        });
-
-      }
-
-      function step(){
-
-        if(!running) return;
-        const now = Date.now();
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.save();
-
-        ctx.globalCompositeOperation = 'lighter';
-
-        ctx.fillStyle = 'rgba(30,10,5,0.25)';
-        ctx.fillRect(0,0,canvas.width,canvas.height);
-        ctx.restore();
-
-        if(!reduced){
-          for(let i=0;i<2;i++) spawn();
-        } else {
-          if(particles.length < 30) spawn();
-        }
-
-        for(let i = particles.length-1; i >= 0; i--){
-          const p = particles[i];
-          const age = now - p.born;
-          const t = Math.min(1, age / p.life);
-          p.x += p.vx + p.drift;
-          p.y += p.vy - 0.02 * DPR * (1 + t*2);
-          p.vx *= 0.995;
-          p.vy *= 0.998;
-          p.size *= 0.998;
-          const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
-          const color = HueGradient(t * (0.9 + p.hueSeed*0.2));
-          grd.addColorStop(0, color);
-          grd.addColorStop(0.4, `rgba(255,200,120,${0.6*(1-t)})`);
-          grd.addColorStop(0.7, `rgba(200,80,30,${0.25*(1-t)})`);
-          grd.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.globalAlpha = 1;
-          ctx.fillStyle = grd;
-
-          ctx.beginPath();
-
-          ctx.arc(p.x, p.y, Math.max(1, p.size), 0, Math.PI*2);
-
-          ctx.fill();
-
-          if(Math.random() < 0.02) {
-
-            ctx.fillStyle = `rgba(60,60,60,${0.02 + 0.12*(1-t)})`;
-
-            ctx.fillRect(p.x - 1*DPR, p.y - 1*DPR, 2*DPR, 2*DPR);
-
-          }
-
-
-          if(t >= 1 || p.size < 0.8) particles.splice(i,1);
-        }
-
-
-        for(let e=0;e<6;e++){
-          if(Math.random() < 0.04 && !reduced){
-            const ex = canvas.width*0.5 + rand(-canvas.width*0.25, canvas.width*0.25);
-
-            ctx.fillStyle = `rgba(255,${rand(120,200)},${rand(20,60)},${rand(0.3,0.9)})`;
-            ctx.fillRect(ex, canvas.height - rand(24,36)*DPR, 1, 1);
-
-          }
-        }
-
-
-        requestAnimationFrame(step);
-      }
-
-
-      if(!reduced) requestAnimationFrame(step);
-      else {
-        ctx.fillStyle = 'rgba(30,10,5,0.6)';
-        ctx.fillRect(0,0,canvas.width,canvas.height);
-
-        requestAnimationFrame(step);
-      }
-
-
-      // audio (simple noise loop via WebAudio)
-      let audioOn = true;
-      let audioCtx, source, gainNode;
-
-      function initAudio(){
-        if(audioCtx) return;
-
-        try{
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-          gainNode = audioCtx.createGain();
-          gainNode.gain.value = 0.15;
-          gainNode.connect(audioCtx.destination);
-
-
-          const bufferSize = 2 * audioCtx.sampleRate;
-          const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-
-          const data = buffer.getChannelData(0);
-          for(let i=0;i<bufferSize;i++){
-            data[i] = (Math.random()*2 - 1) * (Math.random() < 0.002 ? 0.5 : 0.02);
-
-          }
-          source = audioCtx.createBufferSource();
-          source.buffer = buffer;
-
-          source.loop = true;
-          source.connect(gainNode);
-          source.start(0);
-        }catch(e){ console.warn('audio init failed', e); audioOn = false; muteBtn.style.display='none'; }
-      }
-
-
-      muteBtn.addEventListener('click', ()=>{
-        if(!audioCtx) initAudio();
-        audioOn = !audioOn;
-        if(gainNode) gainNode.gain.value = audioOn ? 0.15 : 0;
-        muteBtn.textContent = audioOn ? '🔊' : '🔈';
-      });
-
-      toggle.addEventListener('click', ()=>{
-
-        running = !running;
-        toggle.setAttribute('aria-pressed', String(running));
-        toggle.textContent = running ? 'Камин ON' : 'Камин OFF';
-        if(gainNode) gainNode.gain.value = running && audioOn ? 0.15 : 0;
-        canvas.style.opacity = running ? '1' : '0.06';
-      });
-
-      document.addEventListener('visibilitychange', ()=> {
-        if(document.hidden){
-          running = false;
-          canvas.style.opacity = 0.1;
-          if(gainNode) gainNode.gain.value = 0;
-        } else {
-          running = true;
-          canvas.style.opacity = 1;
-          if(gainNode) gainNode.gain.value = audioOn ? 0.15 : 0;
-
-          requestAnimationFrame(step);
-
-        }
-      });
-
-
-      // init audio on first interaction (to satisfy autoplay policies)
-      document.addEventListener('click', function one() {
-
-        initAudio();
-        document.removeEventListener('click', one);
-
-      }, { once:true });
-
-
-    })();
-
-
-    // ---------- init ----------
-    rebuildList();
-    if(idx >= STORIES.length) idx = 0;
-    showStory(idx);
   </script>
 </body>
-
 </html>
+
