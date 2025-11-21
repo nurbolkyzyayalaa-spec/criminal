@@ -202,9 +202,86 @@
     .fav-item button { margin-left:8px; }
     .fav-item .fav-title { cursor:pointer; color:var(--muted); flex:1; text-align:left; }
     .fav-item .fav-title:hover { color:#fff; }
+
+    /* --- Blood overlay styles (added) --- */
+    .blood-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 160px;
+      pointer-events: none;
+      z-index: 999;
+      overflow: visible;
+      mix-blend-mode: normal;
+      opacity: 1;
+    }
+    .blood-svg { width: 100%; height: 160px; display: block; }
+    .blood-wave {
+      transform-origin: top center;
+      animation: bleedWave 6s ease-in-out infinite;
+      fill: url(#bloodGrad);
+      opacity: 0.98;
+      filter: drop-shadow(0 8px 18px rgba(180,20,20,0.25));
+    }
+    .blood-drop {
+      position: absolute;
+      top: 110px;
+      width: 12px;
+      height: 12px;
+      background: #b71c1c;
+      border-radius: 50%;
+      box-shadow: 0 8px 18px rgba(183,28,28,0.35), inset 0 -3px 6px rgba(0,0,0,0.15);
+      opacity: 0.95;
+      transform-origin: center top;
+      animation: dropFall 3.2s linear infinite;
+      pointer-events: none;
+    }
+    .blood-drop.d1 { left: 8%; animation-delay: 0.3s; width:14px; height:14px; }
+    .blood-drop.d2 { left: 20%; animation-delay: 0.9s; width:10px; height:10px; }
+    .blood-drop.d3 { left: 36%; animation-delay: 1.5s; width:12px; height:12px; }
+    .blood-drop.d4 { left: 52%; animation-delay: 0.6s; width:11px; height:11px; }
+    .blood-drop.d5 { left: 70%; animation-delay: 1.1s; width:13px; height:13px; }
+    .blood-drop.d6 { left: 86%; animation-delay: 1.9s; width:9px;  height:9px; }
+    @keyframes dropFall {
+      0%   { transform: translateY(-8px) scale(0.9); opacity: 0; }
+      6%   { opacity: 1; transform: translateY(0) scale(1); }
+      85%  { transform: translateY(140px) scale(1.05); opacity: 0.9; }
+      100% { transform: translateY(240px) scale(0.7); opacity: 0; }
+    }
+    @keyframes bleedWave {
+      0%   { transform: translateY(-6px) scaleX(1.02); }
+      50%  { transform: translateY(2px)  scaleX(0.98); }
+      100% { transform: translateY(-6px) scaleX(1.02); }
+    }
+    @media (max-width:720px){
+      .blood-overlay { height:120px; }
+      .blood-drop { top:90px; }
+    }
   </style>
 </head>
 <body>
+  <!-- Blood overlay (inserted) -->
+  <div class="blood-overlay" aria-hidden="true">
+    <svg class="blood-svg" viewBox="0 0 1200 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+      <defs>
+        <linearGradient id="bloodGrad" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#ff4b4b"/>
+          <stop offset="60%" stop-color="#c62828"/>
+          <stop offset="100%" stop-color="#7a0b0b"/>
+        </linearGradient>
+      </defs>
+      <path class="blood-wave" d="M0,40 C80,20 140,60 220,50 C300,40 360,20 440,38 C520,56 600,30 680,48 C760,66 820,40 900,55 C980,70 1040,36 1120,50 L1200,60 L1200,160 L0,160 Z"/>
+    </svg>
+
+    <div class="blood-drop d1"></div>
+    <div class="blood-drop d2"></div>
+    <div class="blood-drop d3"></div>
+    <div class="blood-drop d4"></div>
+    <div class="blood-drop d5"></div>
+    <div class="blood-drop d6"></div>
+  </div>
+
   <div class="app" id="app">
 
     <!-- NAVBAR (kazakh) -->
@@ -219,6 +296,7 @@
         <nav class="nav-links" id="primaryNav" aria-label="Негізгі">
           <a href="#" class="active" data-section="home">Басты бет</a>
           <a href="#stories" id="openNewStory">Жаңа әңгімелер</a>
+          <a href="#favorites" data-section="favorites">Таңдаулы</a>
         </nav>
       </div>
 
@@ -796,6 +874,26 @@
     const sel = genreFilter.value || 'all';
     const visible = STORIES.map((s,i)=>({s,i})).filter(x => (sel === 'all') || (x.s.genre === sel));
     if(visible.length) showStory(visible[0].i);
+  </script>
+
+  <!-- Blood overlay init script (added) -->
+  <script>
+    (function(){
+      const overlay = document.querySelector('.blood-overlay');
+      if(!overlay) return;
+      overlay.style.opacity = '0';
+      overlay.style.transition = 'opacity .6s ease';
+      window.addEventListener('load', ()=> {
+        setTimeout(()=> overlay.style.opacity = '1', 450);
+      });
+
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(prefersReduced){
+        overlay.style.transition = 'none';
+        overlay.querySelectorAll('.blood-wave').forEach(el=> el.style.animation = 'none');
+        overlay.querySelectorAll('.blood-drop').forEach(el=> el.style.animation = 'none');
+      }
+    })();
   </script>
 </body>
 </html>
