@@ -6,66 +6,241 @@
   <title>Қорқынышты Әңгімелер — Түнгі Оқиғалар</title>
   <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    :root{--bg1:#0b0f12;--bg2:#111217;--accent:#c33b3b;--muted:#9aa0a6;}
-    [data-theme="dark"]{--bg1:#090b0d;--bg2:#0d0f14;--accent:#ff5b5b;--muted:#a3a6ad;}
-    [data-theme="deep"]{--bg1:#000;--bg2:#000;--accent:#ff2b2b;--muted:#777;}
-    html,body{height:100%;margin:0;font-family:"Inter",system-ui,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:#e8eef2;padding:32px;-webkit-font-smoothing:antialiased;}
-    .app{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start;}
-    .navbar{grid-column:1/3;display:flex;align-items:center;justify-content:space-between;padding:10px 18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:14px;border:1px solid rgba(255,255,255,0.03);}
-    .logo{font-family:'Creepster',cursive;color:var(--accent);font-size:20px}
-    .nav-links{display:flex;gap:14px}
-    .nav-links a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
-    .nav-links a.active, .nav-links a:hover{color:#fff;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
-    .btn{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;color:#e8eef2;cursor:pointer;font-weight:600}
+    :root{
+      --bg1: #0b0f12;
+      --bg2: #111217;
+      --accent: #c33b3b;
+      --muted: #9aa0a6;
+      --card: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --nav-height: 72px;
+    }
+    [data-theme="dark"] {
+      --bg1: #090b0d;
+      --bg2: #0d0f14;
+      --accent: #ff5b5b;
+      --muted: #a3a6ad;
+      --card: rgba(255,255,255,0.05);
+      --glass: rgba(255,255,255,0.035);
+      --glass-2: rgba(255,255,255,0.025);
+    }
+    [data-theme="deep"] {
+      --bg1: #000000;
+      --bg2: #000000;
+      --accent: #ff2b2b;
+      --muted: #777777;
+      --card: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.03);
+    }
+    body, .card, .site-footer, .navbar, .story, .list, .rating-box { transition: background-color .24s ease, color .24s ease, box-shadow .24s ease, border-color .24s ease; }
+    :root, [data-theme] { transition: none; }
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:"Inter",system-ui,sans-serif;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:#e8eef2;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:32px;
+    }
+    .app{
+      width:100%;
+      max-width:980px;
+      display:grid;
+      grid-template-columns:1fr 360px;
+      gap:28px;
+      align-items:start;
+      margin: 0 auto;
+    }
+    .navbar{
+      grid-column:1/3;
+      height:var(--nav-height);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 18px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow:0 8px 30px rgba(0,0,0,0.45);
+      position:sticky;
+      top:20px;
+      z-index:40;
+    }
+    .nav-left{display:flex;align-items:center;gap:16px}
+    .logo{
+      font-family:'Creepster',cursive;
+      color:var(--accent);
+      font-size:20px;
+      letter-spacing:0.6px;
+    }
+    .nav-links{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .nav-links a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:10px;
+      font-weight:600;
+      font-size:14px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active{
+      color:#fff;
+      background:var(--glass-2);
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .nav-actions{display:flex;align-items:center;gap:10px}
+    .btn{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);
+      padding:8px 12px;
+      border-radius:10px;
+      color:#e8eef2;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .btn:hover{transform:translateY(-2px)}
     .genre-select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:10px;color:var(--muted);font-weight:600}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:16px;padding:22px;border:1px solid rgba(255,255,255,0.03);min-height:420px;overflow:hidden}
-    .meta{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-    .tag{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
+    .hamburger{display:none;background:none;border:0;cursor:pointer;padding:8px;border-radius:8px;color:var(--muted);}
+    .hamburger span{display:block;width:20px;height:2px;margin:4px 0;background:var(--muted);border-radius:2px;}
+    @media (max-width:880px){
+      .nav-links{display:none}
+      .hamburger{display:block}
+    }
+    .title{display:flex;align-items:baseline;gap:12px;}
+    h1{margin:0;font-family:"Creepster",cursive;font-size:34px;color:var(--accent);text-shadow:0 6px 20px rgba(195,59,59,0.08),0 1px 0 rgba(0,0,0,0.7);}
+    .subtitle{color:var(--muted);font-size:13px;margin-top:6px;}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:16px;padding:22px;box-shadow:0 8px 30px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.02);min-height:420px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.03);}
+    .meta{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+    .tag{background:var(--glass);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted);border:1px solid rgba(255,255,255,0.02);}
     .genre-badge{background:transparent;border:1px dashed rgba(255,255,255,0.04);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted)}
-    .story{font-size:18px;line-height:1.7;color:#f3f7f8;white-space:pre-wrap;min-height:260px;max-height:420px;overflow:auto;padding-right:8px;font-weight:300}
-    .controls{display:flex;gap:10px;margin-top:18px}
-    aside{background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);border-radius:16px;padding:18px;border:1px solid rgba(255,255,255,0.03)}
-    .list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
-    .story-item{padding:10px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--muted);background:transparent;border:1px dashed rgba(255,255,255,0.02)}
-    .story-item:hover{color:#fff;background:rgba(255,255,255,0.02)}
-    #stars{display:flex;gap:6px;margin-top:6px}
-    .star{background:transparent;border:0;font-size:22px;cursor:pointer;color:var(--muted);padding:6px;border-radius:6px}
-    .star.active{transform:scale(1.2);color:var(--accent)}
-    #likeBtn.liked{background:linear-gradient(180deg, rgba(195,59,59,0.18), rgba(195,59,59,0.12));color:var(--accent);border:1px solid rgba(195,59,59,0.35)}
-    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.72);display:none;align-items:center;justify-content:center;z-index:120}
-    .modal-backdrop.open{display:flex}
-    .modal{width:96%;max-width:720px;background:var(--bg2);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.08)}
-    .fav-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px;border-radius:8px;background:transparent;border:1px dashed rgba(255,255,255,0.02);color:var(--muted)}
-    .fav-title{cursor:pointer;flex:1;text-align:left}
-    .fav-title:hover{color:#fff}
-    @media (max-width:880px){ .app{grid-template-columns:1fr} .navbar{position:sticky;top:0} }
+    .story{font-size:18px;line-height:1.7;color:#f3f7f8;white-space:pre-wrap;min-height:260px;max-height:420px;overflow:auto;padding-right:8px;letter-spacing:0.2px;font-weight:300;}
+    .controls{display:flex;gap:10px;margin-top:18px;}
+    button{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px;color:#e8eef2;cursor:pointer;font-weight:600;transition: transform .12s ease, box-shadow .12s;}
+    button:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.55);}
+    aside{background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);border-radius:16px;padding:18px;height:100%;border:1px solid rgba(255,255,255,0.03);}
+    .list{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+    .story-item{padding:10px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--muted);background:transparent;border:1px dashed rgba(255,255,255,0.02);}
+    .story-item:hover{color:#fff;background:var(--glass-2);}
+    .rating-box { margin-top:16px; }
+    #stars { display:flex; gap:6px; align-items:center; margin-top:6px; }
+    #stars .star { background:transparent; border:0; font-size:22px; cursor:pointer; padding:6px; border-radius:6px; color:var(--muted); }
+    #stars .star:hover, #stars .star:focus { transform:scale(1.15); outline:none; color: #fff; }
+    #stars .star.active { transform:scale(1.25); filter:drop-shadow(0 6px 16px rgba(0,0,0,0.5)); color:var(--accent); }
+    #likeBtn.liked { background: linear-gradient(180deg, rgba(195,59,59,0.18), rgba(195,59,59,0.12)); color:var(--accent); border:1px solid rgba(195,59,59,0.35); }
+    .site-footer {
+      grid-column:1/3;
+      width:100%;
+      margin-top:20px;
+      padding:18px 20px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.55);
+      color: var(--muted);
+    }
+    .site-footer__inner { max-width:980px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .footer-nav { display:flex; gap:18px; align-items:center; }
+    .foot-link { color:var(--muted); text-decoration:none; font-weight:600; padding:6px 10px; border-radius:8px; border:1px solid transparent; }
+    .foot-link:hover { background: rgba(255,255,255,0.02); color:#fff; border-color: rgba(255,255,255,0.03); }
+    .footer-meta { text-align:right; display:flex; flex-direction:column; gap:4px; min-width:180px; }
+    .footer-copy { font-size:14px; color:var(--muted); font-weight:600; }
+    .footer-note { font-size:12px; color:rgba(255,255,255,0.6); }
+    @media (max-width:720px){
+      .site-footer__inner{ flex-direction:column; align-items:center; text-align:center; }
+      .footer-meta{ text-align:center; min-width:auto; }
+      .footer-nav{ order:2; gap:12px; margin-top:8px; flex-wrap:wrap; justify-content:center; }
+    }
+
+    /* Modal / form styles (обновлено: непрозрачное окно) */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:120;
+    }
+    .modal{
+      width:96%;
+      max-width:720px;
+      background: var(--bg2);
+      border-radius:12px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 24px 80px rgba(0,0,0,0.75);
+    }
+    .modal h3{ margin:0 0 8px 0; color:var(--accent); font-family:'Creepster',cursive; }
+    .form-row{ display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+    .form-row input[type="text"], .form-row textarea, .form-row select{
+      background: rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      padding:10px;
+      border-radius:8px;
+      color:inherit;
+      font-size:14px;
+      resize:vertical;
+    }
+    .form-actions{ display:flex; gap:8px; justify-content:flex-end; }
+    .hint { font-size:13px; color:var(--muted); }
+
+    .modal-backdrop.open{ display:flex; }
+
+    /* favorites area styles */
+    #favoritesMenu { margin-top:16px; padding:12px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); }
+    #favList { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+    .fav-item { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:8px; border-radius:8px; background:transparent; border:1px dashed rgba(255,255,255,0.02); color:var(--muted); }
+    .fav-item button { margin-left:8px; }
+    .fav-item .fav-title { cursor:pointer; color:var(--muted); flex:1; text-align:left; }
+    .fav-item .fav-title:hover { color:#fff; }
   </style>
 </head>
 <body>
   <div class="app" id="app">
+
+    <!-- NAVBAR (kazakh) -->
     <header class="navbar" role="banner">
-      <div style="display:flex;align-items:center;gap:14px">
+      <div class="nav-left">
         <div class="logo">Қорқынышты әңгімелер</div>
+
+        <button class="hamburger" id="navToggle" aria-label="Мәзір ашу" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
         <nav class="nav-links" id="primaryNav" aria-label="Негізгі">
           <a href="#" class="active" data-section="home">Басты бет</a>
           <a href="#stories" id="openNewStory">Жаңа әңгімелер</a>
           <a href="#favorites" data-section="favorites">Таңдаулы</a>
         </nav>
       </div>
-      <div style="display:flex;align-items:center;gap:10px">
+
+      <div class="nav-actions">
+        <!-- Genre filter (вставил в навбар) -->
         <select id="genreFilter" class="genre-select" aria-label="Фильтр жанров">
-          <option value="all">Барлығы</option>
+          <option value="all">Барлығы (All genres)</option>
           <option value="mystery">Мистика</option>
           <option value="paranormal">Паранормальное</option>
           <option value="crime">Криминал</option>
           <option value="urban">Қалалық қорқыныш</option>
           <option value="creepypasta">Крипипаста</option>
         </select>
+
         <button class="btn" id="randomTop">Кездейсоқ</button>
+        <!-- Theme switch button -->
         <button class="btn" id="themeBtn" aria-label="Change theme">Интерфейс түсі</button>
       </div>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="card" aria-live="polite">
       <div class="meta">
         <div class="tag" id="tag">Әңгіме 1 / 3</div>
@@ -80,82 +255,127 @@
         <button id="deleteBtn" class="btn">Өшіру</button>
       </div>
 
-      <div style="margin-top:14px">
-        <div style="font-weight:700;margin-bottom:6px">Баға беру</div>
-        <div id="stars" role="radiogroup" aria-label="Рейтинг">
-          <button class="star" data-star="1" aria-label="1">⭐</button>
-          <button class="star" data-star="2" aria-label="2">⭐</button>
-          <button class="star" data-star="3" aria-label="3">⭐</button>
-          <button class="star" data-star="4" aria-label="4">⭐</button>
-          <button class="star" data-star="5" aria-label="5">⭐</button>
+      <!-- RATING (вставлено) -->
+      <div class="rating-box" aria-label="Рейтинг">
+        <h4 style="margin:8px 0 6px 0">Баға беру</h4>
+        <div id="stars" role="radiogroup" aria-label="Звёздный рейтинг">
+          <button class="star" data-star="1" aria-label="1 звезда">⭐</button>
+          <button class="star" data-star="2" aria-label="2 звезды">⭐</button>
+          <button class="star" data-star="3" aria-label="3 звезды">⭐</button>
+          <button class="star" data-star="4" aria-label="4 звезды">⭐</button>
+          <button class="star" data-star="5" aria-label="5 звезды">⭐</button>
         </div>
 
-        <button id="likeBtn" class="btn" style="margin-top:10px">❤️ Маған ұнады</button>
+        <button id="likeBtn" class="btn" style="margin-top:8px">❤️ Маған ұнады</button>
         <p id="ratingStatus" style="margin-top:8px;color:var(--muted);font-size:13px"></p>
       </div>
+      <!-- /RATING -->
+
     </main>
 
     <aside>
       <div style="font-weight:600">Әңгімелер</div>
       <div class="list" id="list"></div>
+      <div style="margin-top:12px;font-size:13px;color:var(--muted)">Жеңіл қорқыныш үшін — терең дем алып, күліңіз :)</div>
 
+      <!-- Favorites panel (қосылды) -->
       <div id="favoritesMenu" style="margin-top:18px;">
         <div style="font-weight:700">Таңдалғандар</div>
-        <div id="favList" style="margin-top:8px"></div>
-        <div style="margin-top:10px;font-size:13px;color:var(--muted)">Таңдалғанды ашу үшін басыңыз. Жою — Жою батырмасымен.</div>
+        <div id="favList"></div>
+        <div style="margin-top:10px;font-size:13px;color:var(--muted)">Таңдалғанды бассаң — ол ашылады. Қоқытсаң — жоғалады.</div>
       </div>
-
-      <div style="margin-top:12px;font-size:13px;color:var(--muted)">Жеңіл қорқыныш үшін — терең дем алып, күліңіз :)</div>
     </aside>
 
-    <footer style="grid-column:1/3;margin-top:16px;padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.03);color:var(--muted)">
-      © jinxforever — 2025 · Түн тыныш болсын…
+    <!-- FOOTER (kazakh) -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__inner">
+        <div class="footer-meta">
+          <div class="footer-copy">© jinxforever — 2025</div>
+          <div class="footer-note">Түн тыныш болсын…</div>
+        </div>
+      </div>
     </footer>
+
   </div>
 
+  <!-- Modal for adding new story -->
   <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <h3 id="modalTitle">Жаңа әңгіме қосу</h3>
-      <div class="hint">Қысқа атау мен мәтін енгізіп, жіберіңіз — бәрі локалда сақталады.</div>
-      <div style="margin-top:10px">
-        <label>Атау</label>
-        <input type="text" id="newTitle" style="width:100%;margin-top:6px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:inherit">
+      <div class="hint">Қысқа атау мен толық мәтінді енгізің — жарияланымы жергілікті сақталады (браузерде).</div>
+
+      <div class="form-row">
+        <label class="small">Атау</label>
+        <input type="text" id="newTitle" placeholder="Әңгіме атауы (мысалы: Түнгі туннель)" />
       </div>
-      <div style="margin-top:10px">
-        <label>Жанр</label>
-        <select id="newGenre" style="width:100%;margin-top:6px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:inherit">
-          <option value="mystery">Мистика</option><option value="paranormal">Паранормальное</option><option value="crime">Криминал</option><option value="urban">Қалалық қорқыныш</option><option value="creepypasta">Крипипаста</option>
+      <div class="form-row">
+        <label class="small">Жанр</label>
+        <select id="newGenre">
+          <option value="mystery">Мистика</option>
+          <option value="paranormal">Паранормальное</option>
+          <option value="crime">Криминал</option>
+          <option value="urban">Қалалық қорқыныш</option>
+          <option value="creepypasta">Крипипаста</option>
         </select>
       </div>
-      <div style="margin-top:10px">
-        <label>Мәтін</label>
-        <textarea id="newText" rows="6" style="width:100%;margin-top:6px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:inherit"></textarea>
+      <div class="form-row">
+        <label class="small">Мәтін</label>
+        <textarea id="newText" rows="6" placeholder="Әңгіме мәтіні..."></textarea>
       </div>
-      <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+
+      <div class="form-actions">
         <button class="btn" id="cancelNew">Бас тарту</button>
         <button class="btn" id="saveNew">Жіберу</button>
       </div>
-      <div id="formMsg" style="margin-top:8px;color:var(--muted)"></div>
+
+      <div style="margin-top:10px" id="formMsg" class="small"></div>
     </div>
   </div>
 
   <script>
-    /* ---------- data & storage ---------- */
+    // ---------- initial stories (fallback) (now with genre) ----------
     const DEFAULT_STORIES = [
       {title: "Ростов өлтірушісі", genre: 'crime', text: "Ол қарапайым көшелерде жүрді және қарапайым адам сияқты көрінді. Бірақ ол адамдарды қасқыр қойларды бақылағандай бақылайтын. Көзқарасына түскендер таңдалып қойылғандарын байқамайды. Ол алыстан бақылап жүрді — сабырлы, тыныш — ал олар түсінген кезде, түн олардың дауысын жұтып қойған болатын."},
       {title: "Уайтчепелдің көлеңкесі", genre: 'mystery', text: "Лондонның тар көшелерінде тұман тірі зат сияқты сырғып өтті. Шырақтар жыпылықтады, қадамдар жаңғырықты, және әр бұрышта — қарап тұрған кезде жоғалып кететін силует. Адамдар оны түтін немесе сыбыр, жүрек соғуы арасындағы кеңістік деп айтты. Оның құрбандары соңғы рет артқы жағының салқын демін есінде сақтады."},
       {title: "Түнгі туннель", genre: 'paranormal', text: "Киотода түнде жүргізушілер көретін, тастанды туннель бар. Ақ кимоно киген әйел жолдың ортасында тұрады, бетін көре алмайсың — ол жай ғана көлеңке сияқты. Бір таксист тоқтады, әйел үнсіз отырды. Бірнеше минуттан кейін ол артқы көздеуші айна мен терезелердің қалың қан торымен жабылғанын байқады. Ол рульді бұрды — әйел ғайып болды, ал орнында суық, ылғалды саусақ іздері қалды. Сол күннен бері бұл жол түнде бос — ал батылдар ғана жүріп өтеді, олар сыбырды естиді: «Неге қарап тұрсың?»"}
     ];
+
+    // ---------- storage helpers ----------
     const STORAGE_KEY = 'sf_stories_v1';
     const FAVORITES_KEY = 'sf_favs_v1';
-    function loadStories(){ try{ const r=localStorage.getItem(STORAGE_KEY); if(!r) return DEFAULT_STORIES.slice(); const p=JSON.parse(r); return Array.isArray(p)&&p.length?p:DEFAULT_STORIES.slice(); }catch(e){return DEFAULT_STORIES.slice()} }
-    function saveStories(arr){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }catch(e){console.error(e)} }
-    function loadFavs(){ try{ const r=localStorage.getItem(FAVORITES_KEY); if(!r) return []; const p=JSON.parse(r); return Array.isArray(p)?p:[] }catch(e){return []} }
-    function saveFavs(arr){ try{ localStorage.setItem(FAVORITES_KEY, JSON.stringify(arr)); }catch(e){console.error(e)} }
 
-    /* ---------- state & elements ---------- */
-    let STORIES = loadStories();
-    let FAVS = loadFavs();
+    function loadStoriesFromStorage(){
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(!raw) return DEFAULT_STORIES.slice();
+        const parsed = JSON.parse(raw);
+        if(Array.isArray(parsed) && parsed.length) return parsed;
+        return DEFAULT_STORIES.slice();
+      } catch(e) { return DEFAULT_STORIES.slice(); }
+    }
+
+    function saveStoriesToStorage(arr){
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+      } catch(e) { console.error('save failed', e); }
+    }
+
+    function loadFavorites(){
+      try {
+        const raw = localStorage.getItem(FAVORITES_KEY);
+        if(!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch(e){ return []; }
+    }
+    function saveFavorites(arr){
+      try { localStorage.setItem(FAVORITES_KEY, JSON.stringify(arr)); } catch(e){ console.error('fav save', e); }
+    }
+
+    // ---------- app state ----------
+    let STORIES = loadStoriesFromStorage();
+    let FAVS = loadFavorites();
+
     const storyEl = document.getElementById('story');
     const tagEl = document.getElementById('tag');
     const listEl = document.getElementById('list');
@@ -163,13 +383,316 @@
     const nextBtn = document.getElementById('next');
     const randomBtn = document.getElementById('randomTop');
     const deleteBtn = document.getElementById('deleteBtn');
+
+    const navToggle = document.getElementById('navToggle');
+    const primaryNav = document.getElementById('primaryNav');
     const genreFilter = document.getElementById('genreFilter');
     const currentGenre = document.getElementById('currentGenre');
-    const stars = document.querySelectorAll('#stars .star');
-    const likeBtn = document.getElementById('likeBtn');
-    const ratingStatus = document.getElementById('ratingStatus');
+
     const favListEl = document.getElementById('favList');
 
+    let idx = 0;
+    let typing = false;
+
+    // safe key generator (rating/like keys tied to title)
+    function keyFromTitle(title){
+      return 'story_' + String(title).toLowerCase().replace(/\s+/g,'_').replace(/[^\w-_]/g,'');
+    }
+    function ratingKey(title){ return keyFromTitle(title) + '_rating'; }
+    function likeKey(title){ return keyFromTitle(title) + '_liked'; }
+
+    // favorites helpers
+    function isFavorited(title){ return FAVS.indexOf(title) !== -1; }
+    function addFavorite(title){
+      if(isFavorited(title)) return;
+      FAVS.push(title);
+      saveFavorites(FAVS);
+      renderFavorites();
+      updateLikeButtonFor(title);
+    }
+    function removeFavorite(title){
+      const i = FAVS.indexOf(title);
+      if(i === -1) return;
+      FAVS.splice(i,1);
+      saveFavorites(FAVS);
+      renderFavorites();
+      updateLikeButtonFor(title);
+    }
+    function toggleFavorite(title){
+      if(isFavorited(title)) removeFavorite(title);
+      else addFavorite(title);
+    }
+    function renderFavorites(){
+      favListEl.innerHTML = '';
+      if(FAVS.length === 0){
+        const el = document.createElement('div');
+        el.style.color = 'var(--muted)';
+        el.textContent = 'Таңдалған әңгімелер әлі жоқ.';
+        favListEl.appendChild(el);
+        return;
+      }
+      FAVS.forEach(t=>{
+        const row = document.createElement('div');
+        row.className = 'fav-item';
+        const titleEl = document.createElement('div');
+        titleEl.className = 'fav-title';
+        titleEl.textContent = t;
+        titleEl.tabIndex = 0;
+        titleEl.addEventListener('click', ()=> {
+          const i = STORIES.findIndex(s => s.title === t);
+          if(i !== -1) showStory(i);
+        });
+        titleEl.addEventListener('keydown', (e)=> { if(e.key === 'Enter') titleEl.click(); });
+
+        const rm = document.createElement('div');
+        const btn = document.createElement('button');
+        btn.className = 'btn';
+        btn.textContent = 'Жою';
+        btn.addEventListener('click', ()=> removeFavorite(t));
+        rm.appendChild(btn);
+
+        row.appendChild(titleEl);
+        row.appendChild(rm);
+        favListEl.appendChild(row);
+      });
+    }
+
+    // build list from STORIES (applies genre filter)
+    function rebuildList(){
+      listEl.innerHTML = '';
+      const selected = genreFilter.value || 'all';
+      const visible = STORIES.map((s,i)=>({s,i})).filter(x => (selected === 'all') || (x.s.genre === selected));
+
+      if(visible.length === 0){
+        const empty = document.createElement('div');
+        empty.className = 'small';
+        empty.style.color = 'var(--muted)';
+        empty.textContent = 'Бұл жанрда әңгімелер жоқ.';
+        listEl.appendChild(empty);
+        return;
+      }
+
+      visible.forEach(({s,i}, pos)=>{
+        const it = document.createElement('div');
+        it.className='story-item';
+        it.textContent = (pos+1) + '. ' + s.title + ' — ' + genreLabel(s.genre);
+        it.addEventListener('click', ()=> showStory(i));
+        listEl.appendChild(it);
+      });
+    }
+
+    function genreLabel(code){
+      const map = { mystery: 'Мистика', crime: 'Криминал', urban: 'Қалалық қорқыныш', creepypasta: 'Крипипаста' };
+      return map[code] || code || 'Белгісіз';
+    }
+
+    // rating elements
+    const stars = document.querySelectorAll("#stars .star");
+    const likeBtn = document.getElementById("likeBtn");
+    const ratingStatus = document.getElementById("ratingStatus");
+
+    function highlightStars(value){
+      stars.forEach(s => s.classList.remove('active'));
+      const n = Number(value) || 0;
+      for(let i=0;i<n;i++) if(stars[i]) stars[i].classList.add('active');
+    }
+
+    function updateLikeButtonFor(title){
+      const liked = isFavorited(title);
+      if(liked){
+        likeBtn.classList.add('liked');
+        likeBtn.textContent = '❤️ Таңдалған';
+        ratingStatus.textContent = "Бұл әңгіме саған ұнаған";
+      } else {
+        likeBtn.classList.remove('liked');
+        likeBtn.textContent = '❤️ Маған ұнады';
+        const saved = localStorage.getItem(ratingKey(title));
+        ratingStatus.textContent = saved ? `Сен ${saved}⭐ қойдың` : '';
+      }
+    }
+
+    function restoreRatingForIndex(i){
+      const title = STORIES[i].title;
+      const saved = localStorage.getItem(ratingKey(title));
+      const liked = isFavorited(title);
+      highlightStars(saved ? Number(saved) : 0);
+      if(liked){
+        likeBtn.classList.add('liked');
+        likeBtn.textContent = '❤️ Таңдалған';
+        ratingStatus.textContent = "Бұл әңгіме саған ұнаған";
+      } else {
+        likeBtn.classList.remove('liked');
+        likeBtn.textContent = '❤️ Маған ұнады';
+        ratingStatus.textContent = saved ? `Сен ${saved}⭐ қойдың` : "";
+      }
+    }
+
+    // stars click
+    stars.forEach(s=>{
+      s.addEventListener('click', ()=>{
+        const v = Number(s.dataset.star);
+        const title = STORIES[idx].title;
+        localStorage.setItem(ratingKey(title), String(v));
+        highlightStars(v);
+        ratingStatus.textContent = `Сен ${v}⭐ қойдың`;
+      });
+      s.addEventListener('keyup', (e)=>{
+        if(e.key === 'Enter' || e.key === ' ') { s.click(); }
+      });
+    });
+
+    likeBtn.addEventListener('click', ()=>{
+      const title = STORIES[idx].title;
+      toggleFavorite(title);
+    });
+
+    // showStory with typing
+    function showStory(i){
+      idx = i;
+      tagEl.textContent = 'Әңгіме ' + (visibleIndexFor(i)+1) + ' / ' + visibleCount();
+      currentGenre.textContent = 'Жанр: ' + genreLabel(STORIES[i].genre);
+      typeWriter(STORIES[i].text);
+      restoreRatingForIndex(i);
+      // focus story for accessibility
+      storyEl.setAttribute('tabindex','0');
+      storyEl.focus({preventScroll:true});
+    }
+
+    function visibleCount(){
+      const sel = genreFilter.value || 'all';
+      return STORIES.filter(s=> sel === 'all' || s.genre === sel).length;
+    }
+
+    function visibleIndexFor(absIndex){
+      const sel = genreFilter.value || 'all';
+      const visible = STORIES.map((s,i)=>({s,i})).filter(x => (sel === 'all') || (x.s.genre === sel));
+      return visible.findIndex(x=> x.i === absIndex) === -1 ? 0 : visible.findIndex(x=> x.i === absIndex);
+    }
+
+    async function typeWriter(text){
+      if(typing) return;
+      typing=true;
+      storyEl.textContent = "";
+      for(let c=0;c<text.length;c++){
+        storyEl.textContent += text[c];
+        storyEl.scrollTop = storyEl.scrollHeight;
+        await new Promise(res=>setTimeout(res,18 + (text[c]==='.'?60:0)));
+      }
+      typing=false;
+    }
+
+    prevBtn.addEventListener('click', ()=>{ if(!typing){ navigate(-1); } });
+    nextBtn.addEventListener('click', ()=>{ if(!typing){ navigate(1); } });
+
+    function navigate(delta){
+      const sel = genreFilter.value || 'all';
+      const visible = STORIES.map((s,i)=>({s,i})).filter(x => (sel === 'all') || (x.s.genre === sel));
+      if(visible.length === 0) return;
+      const cur = visible.findIndex(x=> x.i === idx);
+      let nextPos = (cur + delta + visible.length) % visible.length;
+      showStory(visible[nextPos].i);
+    }
+
+    // random
+    randomBtn.addEventListener('click', ()=>{
+      const sel = genreFilter.value || 'all';
+      const visible = STORIES.map((s,i)=>({s,i})).filter(x => (sel === 'all') || (x.s.genre === sel));
+      if(visible.length === 0) return;
+      const r = Math.floor(Math.random()*visible.length);
+      showStory(visible[r].i);
+    });
+
+    // delete current story
+    deleteBtn.addEventListener('click', ()=>{
+      if(!STORIES.length) return;
+      const title = STORIES[idx].title;
+      // confirmation (in Kazakh)
+      const ok = confirm('Сен сенімдісің бе? Осы әңгімені өшіресің бе?');
+      if(!ok) return;
+
+      // remove story and persist
+      STORIES.splice(idx, 1);
+      saveStoriesToStorage(STORIES);
+
+      // remove related rating/like keys and remove from favorites if present
+      try {
+        localStorage.removeItem(ratingKey(title));
+        localStorage.removeItem(likeKey(title));
+        removeFavorite(title);
+      } catch(e){/* ignore */ }
+
+      // rebuild list and show next visible or clear
+      rebuildList();
+      const sel = genreFilter.value || 'all';
+      const visible = STORIES.map((s,i)=>({s,i})).filter(x => (sel === 'all') || (x.s.genre === sel));
+      if(visible.length){
+        // if idx now out of range, show first visible; else show the item at same visible position if possible
+        const newAbs = Math.min(idx, STORIES.length - 1);
+        showStory(visible[0].i);
+      } else {
+        storyEl.textContent = '';
+        tagEl.textContent = 'Әңгіме 0 / 0';
+        currentGenre.textContent = 'Жанр: Барлығы';
+        ratingStatus.textContent = '';
+        likeBtn.classList.remove('liked');
+        highlightStars(0);
+      }
+    });
+
+    // nav toggle mobile
+    navToggle && navToggle.addEventListener('click', ()=>{
+      const el = primaryNav;
+      if(!el) return;
+      const open = el.style.display === 'flex' ? false : true;
+      el.style.display = open ? 'flex' : 'none';
+      el.style.flexDirection = open ? 'column' : null;
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+
+    primaryNav && primaryNav.addEventListener('click', (e)=>{
+      const a = e.target.closest('a');
+      if(!a) return;
+      primaryNav.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
+      a.classList.add('active');
+      if(window.innerWidth <= 880){ primaryNav.style.display = 'none'; navToggle.setAttribute('aria-expanded','false'); }
+    });
+
+    /* THEME SWITCHER */
+    (function(){
+      const btn = document.getElementById('themeBtn');
+      const THEMES = ['default','dark','deep'];
+      const KEY = 'site-theme-v1';
+      let saved = localStorage.getItem(KEY) || 'default';
+      let ti = THEMES.indexOf(saved);
+      if(ti === -1) { ti = 0; saved = 'default'; }
+      function applyThemeByName(name){
+        if(name === 'default') document.documentElement.removeAttribute('data-theme');
+        else document.documentElement.setAttribute('data-theme', name);
+      }
+      applyThemeByName(saved);
+      btn && btn.addEventListener('click', ()=>{
+        ti = (ti + 1) % THEMES.length;
+        const next = THEMES[ti];
+        applyThemeByName(next);
+        localStorage.setItem(KEY, next);
+        const hint = document.createElement('div');
+        hint.textContent = next === 'default' ? 'Default' : (next === 'dark' ? 'Dark' : 'Deep');
+        hint.style.position = 'fixed';
+        hint.style.left = '50%';
+        hint.style.transform = 'translateX(-50%)';
+        hint.style.bottom = '18px';
+        hint.style.padding = '8px 12px';
+        hint.style.borderRadius = '8px';
+        hint.style.zIndex = 9999;
+        hint.style.fontWeight = 600;
+        hint.style.background = 'rgba(0,0,0,0.6)';
+        hint.style.color = '#fff';
+        document.body.appendChild(hint);
+        setTimeout(()=> hint.remove(), 900);
+      });
+    })();
+
+    // ---------- New story modal logic ----------
     const modalBackdrop = document.getElementById('modalBackdrop');
     const openNewStoryLink = document.getElementById('openNewStory');
     const cancelNew = document.getElementById('cancelNew');
@@ -179,113 +702,101 @@
     const newGenre = document.getElementById('newGenre');
     const formMsg = document.getElementById('formMsg');
 
-    let idx = 0;
-    let typing = false;
-
-    /* ---------- helpers ---------- */
-    function genreLabel(code){ const m={mystery:'Мистика',crime:'Криминал',urban:'Қалалық қорқыныш',creepypasta:'Крипипаста',paranormal:'Паранормальное'}; return m[code]||code||'Белгісіз' }
-    function visibleList(){ const sel = genreFilter.value||'all'; return STORIES.map((s,i)=>({s,i})).filter(x=>sel==='all'||x.s.genre===sel) }
-    function visibleCount(){ return visibleList().length }
-    function visibleIndexFor(abs){ const v=visibleList(); const fi=v.findIndex(x=>x.i===abs); return fi===-1?0:fi }
-
-    function ratingKey(title){ return 'story_'+String(title).toLowerCase().replace(/\s+/g,'_').replace(/[^\w-_]/g,'') + '_rating'; }
-
-    function renderList(){
-      listEl.innerHTML=''; const visible=visibleList();
-      if(visible.length===0){ const e=document.createElement('div'); e.style.color='var(--muted)'; e.textContent='Бұл жанрда әңгімелер жоқ.'; listEl.appendChild(e); return; }
-      visible.forEach(({s,i},pos)=>{ const it=document.createElement('div'); it.className='story-item'; it.textContent=(pos+1)+'. '+s.title+' — '+genreLabel(s.genre); it.addEventListener('click', ()=> showStory(i)); listEl.appendChild(it); });
+    function openModal(){
+      modalBackdrop.classList.add('open');
+      modalBackdrop.setAttribute('aria-hidden','false');
+      newTitle.value = '';
+      newText.value = '';
+      newGenre.value = 'mystery';
+      formMsg.textContent = '';
+      setTimeout(()=> newTitle.focus(), 120);
+    }
+    function closeModal(){
+      modalBackdrop.classList.remove('open');
+      modalBackdrop.setAttribute('aria-hidden','true');
     }
 
-    /* ---------- favorites ---------- */
-    function isFav(title){ return FAVS.indexOf(title)!==-1 }
-    function addFav(title){ if(isFav(title)) return; FAVS.push(title); saveFavs(FAVS); renderFavs(); updateLikeBtn(title) }
-    function removeFav(title){ const i=FAVS.indexOf(title); if(i===-1) return; FAVS.splice(i,1); saveFavs(FAVS); renderFavs(); updateLikeBtn(title) }
-    function toggleFav(title){ if(isFav(title)) removeFav(title); else addFav(title) }
-    function renderFavs(){
-      favListEl.innerHTML=''; if(FAVS.length===0){ const el=document.createElement('div'); el.style.color='var(--muted)'; el.textContent='Таңдалған әңгімелер әлі жоқ.'; favListEl.appendChild(el); return; }
-      FAVS.forEach(t=>{ const row=document.createElement('div'); row.className='fav-item';
-        const titleEl=document.createElement('div'); titleEl.className='fav-title'; titleEl.textContent=t; titleEl.tabIndex=0;
-        titleEl.addEventListener('click', ()=>{ const i=STORIES.findIndex(s=>s.title===t); if(i!==-1) showStory(i); });
-        titleEl.addEventListener('keydown',(e)=>{ if(e.key==='Enter') titleEl.click(); });
-        const rm=document.createElement('div'); const btn=document.createElement('button'); btn.className='btn'; btn.textContent='Жою'; btn.addEventListener('click', ()=> removeFav(t));
-        rm.appendChild(btn); row.appendChild(titleEl); row.appendChild(rm); favListEl.appendChild(row);
-      });
-    }
-    function updateLikeBtn(title){
-      if(!title) return;
-      if(isFav(title)){ likeBtn.classList.add('liked'); likeBtn.textContent='❤️ Таңдалған'; ratingStatus.textContent='Бұл әңгіме саған ұнаған'; }
-
-    /* ---------- ratings & like ---------- */
-    function highlightStars(n){ stars.forEach(s=>s.classList.remove('active')); for(let i=0;i<n;i++) if(stars[i]) stars[i].classList.add('active'); }
-    stars.forEach(s=>{ s.addEventListener('click', ()=>{ const v=Number(s.dataset.star); const title=STORIES[idx].title; localStorage.setItem(ratingKey(title), String(v)); highlightStars(v); ratingStatus.textContent=`Сен ${v}⭐ қойдың`; }); s.addEventListener('keyup',(e)=>{ if(e.key==='Enter'||e.key===' ') s.click(); }); });
-
-    likeBtn.addEventListener('click', ()=> { const title=STORIES[idx].title; toggleFav(title); });
-
-    /* ---------- show / navigation ---------- */
-    async function typeWriter(text){
-      if(typing) return; typing=true; storyEl.textContent=''; for(let c=0;c<text.length;c++){ storyEl.textContent+=text[c]; storyEl.scrollTop=storyEl.scrollHeight; await new Promise(r=>setTimeout(r,18 + (text[c]==='.'?60:0))); } typing=false;
-    }
-
-
-    function showStory(i){
-      idx=i; const vIdx = visibleIndexFor(i); tagEl.textContent = 'Әңгіме ' + (vIdx+1) + ' / ' + visibleCount();
-      currentGenre.textContent = 'Жанр: ' + genreLabel(STORIES[i].genre); typeWriter(STORIES[i].text); restoreStateFor(i);
-      storyEl.setAttribute('tabindex','0'); storyEl.focus({preventScroll:true});
-    }
-
-
-    function restoreStateFor(i){
-      const title = STORIES[i].title;
-      const saved = localStorage.getItem(ratingKey(title));
-      highlightStars(saved ? Number(saved) : 0);
-      updateLikeBtn(title);
-    }
-
-    function navigate(delta){
-      const v=visibleList(); if(v.length===0) return; const cur=v.findIndex(x=>x.i===idx); let next=(cur+delta+v.length)%v.length; showStory(v[next].i);
-    }
-    prevBtn.addEventListener('click', ()=>{ if(!typing) navigate(-1); });
-    nextBtn.addEventListener('click', ()=>{ if(!typing) navigate(1); });
-    randomBtn.addEventListener('click', ()=>{ const v=visibleList(); if(v.length===0) return; const r=Math.floor(Math.random()*v.length); showStory(v[r].i); });
-
-    /* ---------- delete story ---------- */
-    deleteBtn.addEventListener('click', ()=> {
-      if(!STORIES.length) return;
-      const title = STORIES[idx].title;
-      if(!confirm('Сен сенімдісің бе? Осы әңгімені өшіресің бе?')) return;
-      STORIES.splice(idx,1); saveStories(STORIES);
-      try{ localStorage.removeItem(ratingKey(title)); }catch(e){}
-      removeFav(title);
-      renderList(); renderFavs();
-      const v = visibleList();
-      if(v.length) showStory(v[0].i); else { storyEl.textContent=''; tagEl.textContent='Әңгіме 0 / 0'; currentGenre.textContent='Жанр: Барлығы'; ratingStatus.textContent=''; highlightStars(0); }
+    // open modal when user clicks "Жаңа әңгімелер"
+    openNewStoryLink && openNewStoryLink.addEventListener('click', (e)=>{
+      e.preventDefault();
+      openModal();
     });
 
-    /* ---------- modal (new story) ---------- */
-    function openModal(){ modalBackdrop.classList.add('open'); modalBackdrop.setAttribute('aria-hidden','false'); newTitle.value=''; newText.value=''; newGenre.value='mystery'; formMsg.textContent=''; setTimeout(()=> newTitle.focus(),120); }
-    function closeModal(){ modalBackdrop.classList.remove('open'); modalBackdrop.setAttribute('aria-hidden','true'); }
-    openNewStoryLink && openNewStoryLink.addEventListener('click',(e)=>{ e.preventDefault(); openModal(); });
-    cancelNew.addEventListener('click',(e)=>{ e.preventDefault(); closeModal(); });
-    saveNew.addEventListener('click',(e)=>{ e.preventDefault();
-      const title=(newTitle.value||'').trim(); const text=(newText.value||'').trim(); const genre=(newGenre.value||'mystery').trim();
-      if(!title){ formMsg.textContent='Атау енгізіңіз, бос қалмаңыз.'; return; }
-      if(!text){ formMsg.textContent='Мәтін енгізіңіз, бос қалмаңыз.'; return; }
-      if(STORIES.some(s=>s.title.toLowerCase()===title.toLowerCase())){ formMsg.textContent='Осындай атаумен әңгіме бар. Басқаша атаңыз.'; return; }
-      const item={title,text,genre}; STORIES.push(item); saveStories(STORIES); renderList(); closeModal();
-      if(genreFilter.value==='all' || genreFilter.value===genre){ showStory(STORIES.length-1); } else { genreFilter.value=genre; renderList(); showStory(STORIES.length-1); }
-      const hint=document.createElement('div'); hint.textContent='Әңгіме қосылды!'; hint.style.position='fixed'; hint.style.right='18px'; hint.style.bottom='18px'; hint.style.padding='8px 12px'; hint.style.borderRadius='8px'; hint.style.zIndex=9999; hint.style.background='rgba(0,0,0,0.6)'; hint.style.color='#fff'; document.body.appendChild(hint); setTimeout(()=>hint.remove(),1100);
+    // close buttons
+    cancelNew.addEventListener('click', (e)=>{ e.preventDefault(); closeModal(); });
+
+    // submit new story
+    saveNew.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const title = (newTitle.value || '').trim();
+      const text = (newText.value || '').trim();
+      const genre = (newGenre.value || 'mystery').trim();
+      if(!title){ formMsg.textContent = 'Атау енгізіңіз, бос қалмаңыз.'; return; }
+      if(!text){ formMsg.textContent = 'Мәтін енгізіңіз, бос қалмаңыз.'; return; }
+
+      // prevent exact duplicate titles
+      if(STORIES.some(s => s.title.toLowerCase() === title.toLowerCase())){
+        formMsg.textContent = 'Осындай атаумен әңгіме бар. Басқаша атаңыз немесе оны өзгертіңіз.';
+        return;
+      }
+
+      const item = { title, text, genre };
+      STORIES.push(item);
+      saveStoriesToStorage(STORIES);
+      rebuildList();
+      closeModal();
+      // open the newly added story (ensure filter shows it)
+      if(genreFilter.value === 'all' || genreFilter.value === genre){
+        showStory(STORIES.length - 1);
+      } else {
+        // switch filter to the story's genre so user sees it
+        genreFilter.value = genre;
+        rebuildList();
+        showStory(STORIES.length - 1);
+      }
+      // small success hint
+      const hint = document.createElement('div');
+      hint.textContent = 'Әңгіме қосылды!';
+      hint.style.position = 'fixed';
+      hint.style.right = '18px';
+      hint.style.bottom = '18px';
+      hint.style.padding = '8px 12px';
+      hint.style.borderRadius = '8px';
+      hint.style.zIndex = 9999;
+      hint.style.fontWeight = 600;
+      hint.style.background = 'rgba(0,0,0,0.6)';
+      hint.style.color = '#fff';
+      document.body.appendChild(hint);
+      setTimeout(()=> hint.remove(), 1100);
     });
-    modalBackdrop.addEventListener('click',(e)=>{ if(e.target===modalBackdrop) closeModal(); });
-    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && modalBackdrop.classList.contains('open')) closeModal(); });
 
-    /* ---------- genre filter & init ---------- */
-    genreFilter.addEventListener('change', ()=>{ renderList(); const v=visibleList(); if(v.length) showStory(v[0].i); else { storyEl.textContent=''; tagEl.textContent='Әңгіме 0 / 0'; currentGenre.textContent='Жанр: Барлығы'; } });
-    function init(){ renderList(); renderFavs(); if(STORIES.length===0){ tagEl.textContent='Әңгіме 0 / 0'; return; } const v=visibleList(); if(v.length) showStory(v[0].i); }
-    init();
+    // close modal on backdrop click or Escape
+    modalBackdrop.addEventListener('click', (e)=>{
+      if(e.target === modalBackdrop) closeModal();
+    });
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && modalBackdrop.classList.contains('open')) closeModal();
+    });
 
-    /* ---------- theme toggler (small) ---------- */
-    (function(){ const btn=document.getElementById('themeBtn'); const THEMES=['default','dark','deep']; const KEY='site-theme-v1'; let saved=localStorage.getItem(KEY)||'default'; let ti=THEMES.indexOf(saved); if(ti===-1){ti=0;saved='default'} function apply(n){ if(n==='default') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', n); } apply(saved);
-      btn && btn.addEventListener('click', ()=>{ ti=(ti+1)%THEMES.length; const next=THEMES[ti]; apply(next); localStorage.setItem(KEY,next); const hint=document.createElement('div'); hint.textContent = next==='default'?'Default':(next==='dark'?'Dark':'Deep'); hint.style.position='fixed'; hint.style.left='50%'; hint.style.transform='translateX(-50%)'; hint.style.bottom='18px'; hint.style.padding='8px 12px'; hint.style.borderRadius='8px'; hint.style.zIndex=9999; hint.style.background='rgba(0,0,0,0.6)'; hint.style.color='#fff'; document.body.appendChild(hint); setTimeout(()=>hint.remove(),900); }); })();
+    // genre filter
+    genreFilter.addEventListener('change', ()=>{
+      rebuildList();
+      // try to show first in filtered list
+      const sel = genreFilter.value || 'all';
+      const visible = STORIES.map((s,i)=>({s,i})).filter(x => (sel === 'all') || (x.s.genre === sel));
+      if(visible.length) showStory(visible[0].i);
+      else { storyEl.textContent = ''; tagEl.textContent = 'Әңгіме 0 / 0'; currentGenre.textContent = 'Жанр: Барлығы'; }
+    });
+
+    // ---------- init ----------
+    rebuildList();
+    renderFavorites();
+    // ensure idx in range
+    if(idx >= STORIES.length) idx = 0;
+    // show first visible story
+    const sel = genreFilter.value || 'all';
+    const visible = STORIES.map((s,i)=>({s,i})).filter(x => (sel === 'all') || (x.s.genre === sel));
+    if(visible.length) showStory(visible[0].i);
   </script>
 </body>
 </html>
