@@ -21,8 +21,7 @@
       --bg2: #0d0f14;
       --accent: #ff5b5b;
       --muted: #a3a6ad;
-      --card: rgba(255,255,255,0.05);
-      --glass: rgba(255,255,255,0.035);
+      --glass-2: rgba(255,255,255,0.025);
     }
     [data-theme="deep"] {
       --bg1: #000000;
@@ -32,13 +31,12 @@
       --card: rgba(255,255,255,0.06);
       --glass: rgba(255,255,255,0.04);
       --glass-2: rgba(255,255,255,0.03);
-
     }
+
     body, .card, .site-footer, .navbar, .story, .list, .rating-box { transition: background-color .24s ease, color .24s ease, box-shadow .24s ease, border-color .24s ease; }
     :root, [data-theme] { transition: none; }
     html,body{
       height:100%;
-
       margin:0;
       font-family:"Inter",system-ui,sans-serif;
       background:linear-gradient(180deg,var(--bg1),var(--bg2));
@@ -108,38 +106,55 @@
       cursor:pointer;
       font-weight:600;
     }
+
     .btn:hover{transform:translateY(-2px)}
     .genre-select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:10px;color:var(--muted);font-weight:600}
+
     .hamburger{display:none;background:none;border:0;cursor:pointer;padding:8px;border-radius:8px;color:var(--muted);}
+
     .hamburger span{display:block;width:20px;height:2px;margin:4px 0;background:var(--muted);border-radius:2px;}
+
     @media (max-width:880px){
       .nav-links{display:none}
+
       .hamburger{display:block}
     }
     .title{display:flex;align-items:baseline;gap:12px;}
+
     h1{margin:0;font-family:"Creepster",cursive;font-size:34px;color:var(--accent);text-shadow:0 6px 20px rgba(195,59,59,0.08),0 1px 0 rgba(0,0,0,0.7);}
     .subtitle{color:var(--muted);font-size:13px;margin-top:6px;}
+
     .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:16px;padding:22px;box-shadow:0 8px 30px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.02);min-height:420px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.03);}
+
     .meta{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
     .tag{background:var(--glass);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted);border:1px solid rgba(255,255,255,0.02);}
+
     .genre-badge{background:transparent;border:1px dashed rgba(255,255,255,0.04);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted)}
     .story{font-size:18px;line-height:1.7;color:#f3f7f8;white-space:pre-wrap;min-height:260px;max-height:420px;overflow:auto;padding-right:8px;letter-spacing:0.2px;font-weight:300;}
+
     .controls{display:flex;gap:10px;margin-top:18px;}
+
     button{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px;color:#e8eef2;cursor:pointer;font-weight:600;transition: transform .12s ease, box-shadow .12s;}
     button:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.55);}
+
     aside{background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);border-radius:16px;padding:18px;height:100%;border:1px solid rgba(255,255,255,0.03);}
     .list{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+
     .story-item{padding:10px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--muted);background:transparent;border:1px dashed rgba(255,255,255,0.02);}
     .story-item:hover{color:#fff;background:var(--glass-2);}
     .rating-box { margin-top:16px; }
     #stars { display:flex; gap:6px; align-items:center; margin-top:6px; }
     #stars .star { background:transparent; border:0; font-size:22px; cursor:pointer; padding:6px; border-radius:6px; color:var(--muted); }
+
     #stars .star:hover, #stars .star:focus { transform:scale(1.15); outline:none; color: #fff; }
+
     #stars .star.active { transform:scale(1.25); filter:drop-shadow(0 6px 16px rgba(0,0,0,0.5)); color:var(--accent); }
     #likeBtn.liked { background: linear-gradient(180deg, rgba(195,59,59,0.18), rgba(195,59,59,0.12)); color:var(--accent); border:1px solid rgba(195,59,59,0.35); }
     .site-footer {
+
       grid-column:1/3;
       width:100%;
+
       margin-top:20px;
       padding:18px 20px;
       border-radius:12px;
@@ -158,39 +173,53 @@
     @media (max-width:720px){
       .site-footer__inner{ flex-direction:column; align-items:center; text-align:center; }
       .footer-meta{ text-align:center; min-width:auto; }
+
       .footer-nav{ order:2; gap:12px; margin-top:8px; flex-wrap:wrap; justify-content:center; }
+
     }
+
 
     /* Modal / form styles (обновлено: непрозрачное окно) */
     .modal-backdrop{
       position:fixed;
       inset:0;
+
       background:rgba(0,0,0,0.72);
+
       display:none;
       align-items:center;
+
       justify-content:center;
       z-index:120;
     }
+
     .modal{
       width:96%;
       max-width:720px;
+
       background: var(--bg2);
       border-radius:12px;
+
       padding:18px;
       border:1px solid rgba(255,255,255,0.08);
+
       box-shadow:0 24px 80px rgba(0,0,0,0.75);
     }
+
     .modal h3{ margin:0 0 8px 0; color:var(--accent); font-family:'Creepster',cursive; }
     .form-row{ display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
     .form-row input[type="text"], .form-row textarea, .form-row select{
+
       background: rgba(255,255,255,0.03);
       border:1px solid rgba(255,255,255,0.06);
       padding:10px;
       border-radius:8px;
+
       color:inherit;
       font-size:14px;
       resize:vertical;
     }
+
     .form-actions{ display:flex; gap:8px; justify-content:flex-end; }
     .hint { font-size:13px; color:var(--muted); }
 
@@ -242,7 +271,10 @@
 
       <div class="story" id="story" tabindex="0"></div>
 
-      <div class="controls">\n        <button id="prev">◀ Алдыңғы</button>\n        <button id="next">Келесі ▶</button>\n        <button id="deleteBtn" class="btn danger" title="Өшіру">🗑️ Жою</button>\n      </div>
+      <div class="controls">
+        <button id="prev">◀ Алдыңғы</button>
+        <button id="next">Келесі ▶</button>
+      </div>
 
       <!-- RATING (вставлено) -->
       <div class="rating-box" aria-label="Рейтинг">
@@ -348,7 +380,7 @@
     const listEl = document.getElementById('list');
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
-    const randomBtn = document.getElementById('randomTop');\n    const deleteBtn = document.getElementById('deleteBtn');
+    const randomBtn = document.getElementById('randomTop');
 
     const navToggle = document.getElementById('navToggle');
     const primaryNav = document.getElementById('primaryNav');
@@ -390,7 +422,7 @@
     }
 
     function genreLabel(code){
-      const map = { mystery: 'Мистика', paranormal: 'Паранормальное', crime: 'Криминал', urban: 'Қалалық қорқыныш', creepypasta: 'Крипипаста' };
+      const map = { mystery: 'Мистика', crime: 'Криминал', urban: 'Қалалық қорқыныш', creepypasta: 'Крипипаста' };
       return map[code] || code || 'Белгісіз';
     }
 
@@ -656,4 +688,3 @@
   </script>
 </body>
 </html>
-
